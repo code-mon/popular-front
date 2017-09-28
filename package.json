@@ -7,7 +7,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "prop-types": "^15.6.0",
+    "radium": "^0.19.4",
     "react": "^16.0.0",
+    "react-animations": "^0.1.0",
     "react-dom": "^16.0.0"
   },
   "devDependencies": {
