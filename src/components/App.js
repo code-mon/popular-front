@@ -1,4 +1,5 @@
 import React from 'react';
+import CardBox from './CardBox.js';
 import TitleBar from './TitleBar.js';
 import { StyleRoot } from 'radium';
 
@@ -17,6 +18,7 @@ const App = () => {
       <StyleRoot>
         <div>
           <TitleBar>POPULAR</TitleBar>
+          <CardBox />
         </div>
       </StyleRoot>
     </div>

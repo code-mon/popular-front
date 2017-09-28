@@ -1,26 +1,28 @@
-import axios from 'axios';
-
 const TMDB_KEY = '2ae29cc0870029d6246318d7ae859e55';
 
+// config options used across API endpoints
 const baseConfig = {
   api_key: TMDB_KEY,
   language: 'en-US'
 };
 
-function getPageOfMovies({ url = '', page = 1 } = {}) {
-  // requires calling function to pass a url of format https://api.themoviedb.org/3/discover/movie
-  if (typeof url != 'string' || url === '') {
-    throw new Error('No API URL provided');
+function getPageOfMovies(fn, { page = 1, sort_by = 'popularity.desc' } = {}) {
+  // requies function for fetching data be passed in as first parameter
+  if (typeof fn != 'function') {
+    throw new Error('Fetch function not passed in to API call');
   }
 
+  // merge config objects for axios
   const config = {
-    ...baseConfig,
-    sort_by: 'popularity.desc',
-    include_adult: false,
-    include_video: false,
-    page
+    params: {
+      ...baseConfig,
+      sort_by: 'popularity.desc',
+      include_adult: false,
+      include_video: false,
+      page
+    }
   };
-  return axios.get(url, config);
+  return fn('https://api.themoviedb.org/3/discover/movie', config);
 }
 
 export { getPageOfMovies };
