@@ -54,6 +54,7 @@ class MovieCard extends Component {
 
   render() {
     return (
+      // Waypoint watches for when an element is in view and calls the onEnter and onLeave as needed
       <Waypoint onEnter={this.setVisible} onLeave={this.setVisible}>
         <div
           style={[this.styles.base, !this.state.visible && this.styles.hidden]}>

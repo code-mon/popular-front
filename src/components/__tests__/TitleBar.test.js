@@ -4,6 +4,7 @@ import Radium from 'radium';
 
 import TitleBar from '../TitleBar.js';
 
+// disable Radium errors for testing
 Radium.TestMode.enable();
 
 it('renders correctly', () => {
