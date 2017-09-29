@@ -7,8 +7,9 @@ const style = {
   base: {
     fontSize: '64px',
     fontWeight: 'bold',
-    maxWidth: '960px',
+    width: '1200px',
     margin: '0 auto',
+    transform: 'translateY(11px)',
     animation: '1s ease-in',
     animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
   }

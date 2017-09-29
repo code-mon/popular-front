@@ -25,4 +25,10 @@ function getPageOfMovies(fn, { page = 1, sort_by = 'popularity.desc' } = {}) {
   return fn('https://api.themoviedb.org/3/discover/movie', config);
 }
 
-export { getPageOfMovies };
+function getCompleteMovieBackdropPath(path) {
+  // accepts incomplete path returned with a movie item from the API
+
+  return `https://image.tmdb.org/t/p/w300${path}`;
+}
+
+export { getPageOfMovies, getCompleteMovieBackdropPath };

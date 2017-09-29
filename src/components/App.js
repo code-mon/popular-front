@@ -7,21 +7,19 @@ const style = {
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center',
   backgroundColor: '#000000',
-  color: '#FD4034'
+  color: '#FD4034',
+  overflowY: 'auto'
 };
 
 const App = () => {
   return (
-    <div style={style}>
-      <StyleRoot>
-        <div>
-          <TitleBar>POPULAR</TitleBar>
-          <CardBox />
-        </div>
-      </StyleRoot>
-    </div>
+    <StyleRoot style={{ height: '100%' }}>
+      <div style={style}>
+        <TitleBar>POPULAR</TitleBar>
+        <CardBox />
+      </div>
+    </StyleRoot>
   );
 };
 
