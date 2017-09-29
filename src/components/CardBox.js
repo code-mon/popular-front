@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { getPageOfMovies } from '../utils/api.js';
+import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard.js';
 import PropTypes from 'prop-types';
 
@@ -9,7 +10,7 @@ export default class CardBox extends Component {
     super(props);
     this.state = {
       moviesArray: [],
-      loading: true,
+      loading: false,
       bottomOfBoxY: undefined,
       windowHeight: window.innerHeight
     };
@@ -26,45 +27,50 @@ export default class CardBox extends Component {
         zIndex: '1'
       }
     };
+
+    this.loadMoreMovies = this.loadMoreMovies.bind(this);
   }
 
-  componentDidMount() {
-    getPageOfMovies(axios.get, { page: this.pageToLoad })
+  loadMoreMovies(page) {
+    getPageOfMovies(axios.get, { page })
       .then(response => {
         return response.data;
       })
       .then(data => {
-        this.setState({
-          moviesArray: data.results,
-          loading: false
+        let movies = data.results;
+        this.setState(prevState => {
+          return {
+            moviesArray: [...prevState.moviesArray, ...movies]
+          };
         });
-        this.pageToLoad = data.page + 1;
       })
       .catch(err => {
         this.setState({
           error: err
         });
       });
-    console.log(this.node.scrollHeight);
   }
 
   render() {
-    if (this.state.loading) {
-      return <div ref={node => (this.node = node)} />;
-    } else {
+    const cards = this.state.moviesArray.map((movie, i) => {
       return (
-        <div style={this.styles.base} ref={node => (this.node = node)}>
-          {this.state.moviesArray.map((movie, i) => {
-            return (
-              <MovieCard
-                key={i}
-                movieTitle={movie.title}
-                movieBackdrop={movie.backdrop_path}
-              />
-            );
-          })}
-        </div>
+        <MovieCard
+          key={i}
+          movieTitle={movie.title}
+          movieBackdrop={movie.backdrop_path}
+        />
       );
-    }
+    });
+
+    return (
+      <InfiniteScroll
+        style={this.styles.base}
+        hasMore={true}
+        loadMore={this.loadMoreMovies}
+        loader={<div>Loading</div>}
+        useWindow={false}>
+        {cards}
+      </InfiniteScroll>
+    );
   }
 }
