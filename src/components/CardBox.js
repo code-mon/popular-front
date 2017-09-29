@@ -4,6 +4,7 @@ import { getPageOfMovies } from '../utils/api.js';
 import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard.js';
 import PropTypes from 'prop-types';
+const Spinner = require('react-spinkit');
 
 export default class CardBox extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ export default class CardBox extends Component {
       base: {
         display: 'flex',
         flexBasis: '1200px',
+        justifyContent: 'space-around',
         flexWrap: 'wrap',
         maxWidth: '1200px',
         margin: '0 auto',
@@ -67,7 +69,7 @@ export default class CardBox extends Component {
         style={this.styles.base}
         hasMore={true}
         loadMore={this.loadMoreMovies}
-        loader={<div>Loading</div>}
+        loader={<Spinner name="circle" color="white" />}
         useWindow={false}>
         {cards}
       </InfiniteScroll>
