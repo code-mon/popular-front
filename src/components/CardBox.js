@@ -45,14 +45,15 @@ export default class CardBox extends Component {
           error: err
         });
       });
+    console.log(this.node.scrollHeight);
   }
 
   render() {
     if (this.state.loading) {
-      return <div />;
+      return <div ref={node => (this.node = node)} />;
     } else {
       return (
-        <div style={this.styles.base}>
+        <div style={this.styles.base} ref={node => (this.node = node)}>
           {this.state.moviesArray.map((movie, i) => {
             return (
               <MovieCard

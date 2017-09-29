@@ -1,4 +1,4 @@
-import { getPageOfMovies } from '../api.js';
+import { getPageOfMovies, getCompleteMovieBackdropPath } from '../api.js';
 
 test('getPageOfMovies throws an error without axios', () => {
   expect(() => {
@@ -23,6 +23,11 @@ test('getPageOfMovies combines the parameters config object', () => {
       test: true
     });
   });
+});
+
+test('getCompleteMovieBackdropPath creates correct string', () => {
+  const result = getCompleteMovieBackdropPath('/test');
+  expect(result).toBe('https://image.tmdb.org/t/p/w300/test');
 });
 
 function fakeAxios(url, config) {
