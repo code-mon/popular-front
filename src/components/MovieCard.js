@@ -25,8 +25,6 @@ class MovieCard extends Component {
         color: '#f5f5f5',
         opacity: '0.6',
         transition: 'transform 300ms ease-in',
-        // animation: `0.5s ease-in`,
-        // animationName: Radium.keyframes(zoomInAndFadeUp, 'zoomAndFade'),
         ':hover': {
           zIndex: '1',
           opacity: '1',
@@ -47,7 +45,6 @@ class MovieCard extends Component {
   }
 
   static propTypes = {
-    animationDelay: PropTypes.string,
     movieBackdrop: PropTypes.string.isRequired,
     movieTitle: PropTypes.string.isRequired
   };

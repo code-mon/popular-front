@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  data-radium={true}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  style={
+    Object {
+      "backgroundImage": "url(https://image.tmdb.org/t/p/w300/)",
+      "color": "#f5f5f5",
+      "display": "flex",
+      "flexDirection": "column",
+      "fontSize": "18px",
+      "height": "169px",
+      "justifyContent": "center",
+      "opacity": "0",
+      "textAlign": "center",
+      "transform": "scale(0.7)",
+      "transition": "transform 300ms ease-in",
+      "visibility": "hidden",
+      "width": "300px",
+    }
+  }
+>
+  Die Hard
+</div>
+`;
