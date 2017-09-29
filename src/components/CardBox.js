@@ -11,11 +11,8 @@ export default class CardBox extends Component {
     super(props);
     this.state = {
       moviesArray: [],
-      loading: false,
-      bottomOfBoxY: undefined,
       windowHeight: window.innerHeight
     };
-    this.pageToLoad = 1;
 
     this.styles = {
       base: {
@@ -58,6 +55,7 @@ export default class CardBox extends Component {
       return (
         <MovieCard
           key={i}
+          animationDelay={`${i * 0.1}s`}
           movieTitle={movie.title}
           movieBackdrop={movie.backdrop_path}
         />
