@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { getCompleteMovieBackdropPath } from '../utils/api.js';
-import { zoomIn, fadeInUp, merge } from 'react-animations';
 import Radium from 'radium';
 import PropTypes from 'prop-types';
 const Waypoint = require('react-waypoint');
-
-const zoomInAndFadeUp = merge(zoomIn, fadeInUp);
 
 class MovieCard extends Component {
   constructor(props) {

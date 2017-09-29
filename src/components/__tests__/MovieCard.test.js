@@ -22,10 +22,21 @@ it('has a WayPoint wrapper', () => {
   expect(wrapper.find(Waypoint)).toHaveLength(1);
 });
 
-it('has a movie title displayed', () => {
+it('has a movie title', () => {
   const wrapper = shallow(
     <MovieCard movieTitle="Die Hard" movieBackdrop="/" />
   );
   const card = wrapper.children();
   expect(card.text()).toEqual('Die Hard');
+});
+
+it('toggles visibility', () => {
+  const wrapper = shallow(
+    <MovieCard movieTitle="Die Hard" movieBackdrop="/" />
+  );
+  expect(wrapper.state('visible')).toBe(false);
+  wrapper.simulate('enter');
+  expect(wrapper.state('visible')).toBe(true);
+  wrapper.simulate('leave');
+  expect(wrapper.state('visible')).toBe(false);
 });

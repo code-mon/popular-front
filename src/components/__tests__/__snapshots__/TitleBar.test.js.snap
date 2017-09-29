@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  data-radium={true}
+  style={
+    Object {
+      "animation": "1s ease-in",
+      "animationName": "fadeInUp-radium-animation-97401d6b",
+      "fontSize": "64px",
+      "fontWeight": "bold",
+      "margin": "0 auto",
+      "transform": "translateY(11px)",
+      "width": "1200px",
+    }
+  }
+>
+  POPULAR
+</div>
+`;
