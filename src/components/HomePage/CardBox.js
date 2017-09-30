@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { getPageOfMovies } from '../utils/api.js';
+import { getPageOfMovies } from '../../utils/api.js';
 import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard.js';
 import PropTypes from 'prop-types';
 // const Spinner = require('react-spinkit');
-import '../css/loader.css';
+import '../../css/loader.css';
 
 export default class CardBox extends Component {
   constructor(props) {
