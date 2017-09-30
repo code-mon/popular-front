@@ -1,5 +1,6 @@
 import React from 'react';
 import CardBox from './CardBox.js';
+import Navbar from './Navbar.js';
 import TitleBar from './TitleBar.js';
 import { StyleRoot } from 'radium';
 
@@ -16,6 +17,7 @@ const App = () => {
   return (
     <StyleRoot style={{ height: '100%' }}>
       <div style={style}>
+        <Navbar />
         <TitleBar>POPULAR</TitleBar>
         <CardBox />
       </div>
