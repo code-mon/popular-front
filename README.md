@@ -1,15 +1,13 @@
 # Popular
 Popular displays popular movies in a Netflix like interface.
 
-[View the live project here](https://popular-da756.firebaseapp.com)
-
 ## Local install
 To run locally, clone this repository and execute the following commands:
 
 ```bash
 cd ./popular
-npm i
-npm start
+yarn
+yarn start
 ```
 
 You can run the tests with the command `npm run test`.
