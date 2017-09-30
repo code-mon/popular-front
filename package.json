@@ -40,5 +40,10 @@
     "start": "webpack-dev-server --open",
     "build": "NODE_ENV='production' webpack -p",
     "deploy": "yarn build && firebase deploy"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
