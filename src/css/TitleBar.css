@@ -1,0 +1,30 @@
+.title-bar {
+  animation: fadeInUp 2s linear;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  25% {
+    opacity: 0;
+    transform: translatY(30px);
+  }
+
+  50% {
+    opacity: 0.33;
+    transform: translateY(15px);
+  }
+
+  75% {
+    opacity: 0.66;
+    transform: translateY(11px);
+  }
+
+  100% {
+    opactiry: 1;
+    transform: translateY(7px);
+  }
+}
