@@ -9,17 +9,17 @@
   }
 
   25% {
-    opacity: 0.25;
-    transform: translatY(20px);
+    opacity: 0;
+    transform: translatY(30px);
   }
 
   50% {
-    opacity: 0.5;
+    opacity: 0.33;
     transform: translateY(15px);
   }
 
   75% {
-    opacity: 0.8;
+    opacity: 0.66;
     transform: translateY(11px);
   }
 
