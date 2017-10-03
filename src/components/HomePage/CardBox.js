@@ -18,7 +18,6 @@ export default class CardBox extends Component {
     this.styles = {
       base: {
         display: 'flex',
-        flexBasis: '1200px',
         justifyContent: 'space-around',
         flexWrap: 'wrap',
         maxWidth: '1200px',
@@ -69,7 +68,7 @@ export default class CardBox extends Component {
         hasMore={true}
         loadMore={this.loadMoreMovies}
         loader={<Spinner name="circle" color="white" />}
-        useWindow={false}>
+        useWindow={true}>
         {cards}
       </InfiniteScroll>
     );

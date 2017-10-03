@@ -1,15 +1,38 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const style = {
-  height: '150px',
+  height: '50px',
   borderBottom: '2px solid #FD4034',
   marginBottom: '1rem',
   display: 'flex',
-  justifyContent: 'flexEnd'
+  justifyContent: 'flex-end',
+  padding: '0 .5rem'
+};
+
+const navlinkStyle = {
+  margin: 'auto 0',
+  width: '4rem',
+  textAlign: 'center',
+  textDecoration: 'none',
+  color: 'white'
+};
+
+const activeStyle = {
+  color: '#FD4034'
 };
 
 const Navbar = () => {
-  return <div style={style}>NAV</div>;
+  return (
+    <div style={style}>
+      <NavLink to="/login" style={navlinkStyle} activeStyle={activeStyle}>
+        Login
+      </NavLink>
+      <NavLink to="/register" style={navlinkStyle} activeStyle={activeStyle}>
+        Signup
+      </NavLink>
+    </div>
+  );
 };
 
 export default Navbar;

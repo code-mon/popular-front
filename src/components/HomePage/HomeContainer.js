@@ -7,17 +7,15 @@ const style = {
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: '#000000',
-  color: '#FD4034',
-  overflowY: 'auto'
+  color: '#FD4034'
 };
 
 const HomeContainer = () => {
   return (
-      <div style={style}>
-        <TitleBar>POPULAR</TitleBar>
-        <CardBox />
-      </div>
+    <div style={style}>
+      <TitleBar>POPULAR</TitleBar>
+      <CardBox />
+    </div>
   );
 };
 
