@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Radium from 'radium';
 import '../../css/TitleBar.css';
 
 const style = {
@@ -25,4 +24,4 @@ TitleBar.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-export default Radium(TitleBar);
+export default TitleBar;

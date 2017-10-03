@@ -9,6 +9,7 @@ exports[`renders without crashing 1`] = `
         "display": "flex",
         "height": "50px",
         "justifyContent": "flex-end",
+        "marginBottom": ".5rem",
         "padding": "0 .5rem",
       }
     }
