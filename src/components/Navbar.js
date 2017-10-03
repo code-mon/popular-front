@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const style = {
   height: '50px',
   borderBottom: '2px solid #FD4034',
-  marginBottom: '1rem',
+  // marginBottom: '.5rem',
   display: 'flex',
   justifyContent: 'flex-end',
   padding: '0 .5rem'

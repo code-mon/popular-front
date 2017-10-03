@@ -8,10 +8,45 @@ exports[`renders without crashing 1`] = `
         "borderBottom": "2px solid #FD4034",
         "display": "flex",
         "height": "50px",
-        "justifyContent": "flexEnd",
-        "marginBottom": "1rem",
+        "justifyContent": "flex-end",
+        "padding": "0 .5rem",
       }
     }
-  />
+  >
+    <a
+      aria-current={false}
+      className={undefined}
+      href="/login"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+          "margin": "auto 0",
+          "textAlign": "center",
+          "textDecoration": "none",
+          "width": "4rem",
+        }
+      }
+    >
+      Login
+    </a>
+    <a
+      aria-current={false}
+      className={undefined}
+      href="/register"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "white",
+          "margin": "auto 0",
+          "textAlign": "center",
+          "textDecoration": "none",
+          "width": "4rem",
+        }
+      }
+    >
+      Signup
+    </a>
+  </div>
 </div>
 `;

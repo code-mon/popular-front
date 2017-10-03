@@ -9,7 +9,7 @@ const style = {
     fontWeight: 'bold',
     width: '1200px',
     margin: '0 auto',
-    transform: 'translateY(11px)'
+    transform: 'translateY(7px)'
   }
 };
 
