@@ -41,13 +41,16 @@ class App extends Component {
   }
 
   configureAuth() {
-    if (!window.gapi) {
-      setTimeout(this.configureAuth, 300);
-    } else {
+    const script = document.createElement('script');
+    script.src = 'https://apis.google.com/js/api.js';
+
+    script.onload = () => {
       gapi.load('auth2', () => {
         initClient(this.setSignInStatus, this.setUser);
       });
-    }
+    };
+
+    document.body.appendChild(script);
   }
 
   render() {
