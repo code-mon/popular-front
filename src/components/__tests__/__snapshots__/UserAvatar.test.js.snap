@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "justifyContent": "space-between",
+      "padding": "0 0.5rem 0 0",
+    }
+  }
+>
+  <img
+    alt="avatar"
+    src="https://lh6.googleusercontent.com/-daJSSSOVbi4/AAAAAAAAAAI/AAAAAAAADt0/FffcUzgmiwo/s96-c/photo.jpg"
+    style={
+      Object {
+        "borderRadius": "50%",
+        "height": "3rem",
+        "marginRight": "0.25rem",
+      }
+    }
+  />
+  <p>
+    Jonathan
+  </p>
+</div>
+`;
