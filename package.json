@@ -6,7 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
-    "firebase": "^4.5.0",
     "prop-types": "^15.6.0",
     "radium": "^0.19.4",
     "react": "^16.0.0",
