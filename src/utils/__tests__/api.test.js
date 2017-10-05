@@ -18,7 +18,7 @@ test('getPageOfMovies combines the parameters config object', () => {
   };
   getPageOfMovies(fakeAxios).then(response => {
     expect(response.config).toEqual({
-      api_key: TMDB_KEY,
+      api_key: '2ae29cc0870029d6246318d7ae859e55',
       language: 'en-US',
       test: true
     });

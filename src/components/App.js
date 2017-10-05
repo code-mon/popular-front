@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import HomeContainer from './HomePage/HomeContainer';
 import LoginContainer from './LoginPage/LoginContainer';
 import RegisterContainer from './RegisterPage/RegisterContainer';
 import DashboardContainer from './DashboardPage/DashboardContainer';
+import initClient, { getSignInStatus } from '../utils/auth.js';
 
 const style = {
   display: 'flex',
@@ -13,18 +14,59 @@ const style = {
   color: '#FD4034'
 };
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Route path="/" component={Navbar} />
-        <Route exact path="/" component={HomeContainer} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/register" component={RegisterContainer} />
-        <Route path="/dashboard" component={DashboardContainer} />
-      </div>
-    </Router>
-  );
-};
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: null, isSignedIn: false };
+
+    this.setSignInStatus = this.setSignInStatus.bind(this);
+    this.setUser = this.setUser.bind(this);
+    this.configureAuth = this.configureAuth.bind(this);
+  }
+
+  setSignInStatus(isSignedIn) {
+    this.setState({
+      isSignedIn
+    });
+  }
+
+  setUser(user) {
+    this.setState({
+      user
+    });
+  }
+
+  componentDidMount() {
+    this.configureAuth();
+  }
+
+  configureAuth() {
+    if (!window.gapi) {
+      setTimeout(this.configureAuth, 300);
+    } else {
+      gapi.load('auth2', () => {
+        initClient(this.setSignInStatus, this.setUser);
+      });
+    }
+  }
+
+  render() {
+    const { isSignedIn, user } = this.state;
+    return (
+      <Router>
+        <div>
+          <Route
+            path="/"
+            render={() => <Navbar isSignedIn={isSignedIn} user={user} />}
+          />
+          <Route exact path="/" component={HomeContainer} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/register" component={RegisterContainer} />
+          <Route path="/dashboard" component={DashboardContainer} />
+        </div>
+      </Router>
+    );
+  }
+}
 
 export default App;
