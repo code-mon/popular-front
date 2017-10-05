@@ -1,10 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import UserAvatar from '../UserAvatar.js';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const user = {
   w3: {

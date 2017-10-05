@@ -43,6 +43,10 @@
     "deploy": "yarn build && firebase deploy"
   },
   "jest": {
+    "setupFiles": [
+      "<rootDir>/scripts/animationFrameShim.js",
+      "<rootDir>/scripts/enzymeAdapter.js"
+    ],
     "moduleNameMapper": {
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }

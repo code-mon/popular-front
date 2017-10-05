@@ -1,12 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import Enzyme, { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-
-import MovieCard from '../MovieCard.js';
+import MovieCard from '../HomePage/MovieCard.js';
 const Waypoint = require('react-waypoint');
-
-Enzyme.configure({ adapter: new Adapter() });
 
 it('renders correctly', () => {
   const tree = renderer

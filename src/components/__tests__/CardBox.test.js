@@ -1,13 +1,9 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import Radium from 'radium';
+import InfiniteScroll from 'react-infinite-scroller';
 
-import CardBox from '../CardBox.js';
+import CardBox from '../HomePage/CardBox.js';
 
-// disable Radium errors for testing
-Radium.TestMode.enable();
-
-it('renders correctly', () => {
-  const tree = renderer.create(<CardBox />).toJSON();
-  expect(tree).toMatchSnapshot();
+it('has an InfiniteScroll', () => {
+  const wrapper = shallow(<CardBox />);
+  expect(wrapper.find(InfiniteScroll)).toHaveLength(1);
 });
