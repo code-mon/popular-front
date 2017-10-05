@@ -13,14 +13,16 @@ test('getPageOfMovies calls the proper url', () => {
 });
 
 test('getPageOfMovies combines the parameters config object', () => {
-  const testConfig = {
-    test: true
-  };
   getPageOfMovies(fakeAxios).then(response => {
     expect(response.config).toEqual({
-      api_key: '2ae29cc0870029d6246318d7ae859e55',
-      language: 'en-US',
-      test: true
+      params: {
+        api_key: '2ae29cc0870029d6246318d7ae859e55',
+        language: 'en-US',
+        include_adult: false,
+        include_video: false,
+        page: 1,
+        sort_by: 'popularity.desc'
+      }
     });
   });
 });

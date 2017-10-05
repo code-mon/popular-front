@@ -2,15 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <div
-  data-radium={true}
+  className="title-bar"
   style={
     Object {
-      "animation": "1s ease-in",
-      "animationName": "fadeInUp-radium-animation-97401d6b",
       "fontSize": "64px",
       "fontWeight": "bold",
       "margin": "0 auto",
-      "transform": "translateY(11px)",
+      "transform": "translateY(7px)",
       "width": "1200px",
     }
   }
