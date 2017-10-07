@@ -10,7 +10,7 @@ const outerStyle = {
   marginBottom: '.5rem',
   display: 'flex',
   justifyContent: 'space-between',
-  padding: '.5rem .5rem'
+  padding: '.5rem 1rem'
 };
 
 const linkHolderStyle = {
@@ -23,7 +23,8 @@ const navlinkStyle = {
   width: '4rem',
   textAlign: 'center',
   textDecoration: 'none',
-  color: 'white'
+  color: 'white',
+  width: '100%'
 };
 
 const activeStyle = {
@@ -40,33 +41,26 @@ const Navbar = props => {
         </NavLink>
       </div>
       <div style={linkHolderStyle}>
-        {isSignedIn && user
-          ? [
-              <UserAvatar key="user" user={user} />,
-              <NavLink
-                key="signout"
-                to="/"
-                style={navlinkStyle}
-                onClick={handleSignOutClick}>
-                Sign out
-              </NavLink>
-            ]
-          : [
-              <NavLink
-                key="login"
-                to="/login"
-                style={navlinkStyle}
-                activeStyle={activeStyle}>
-                Login
-              </NavLink>,
-              <NavLink
-                key="signup"
-                to="/register"
-                style={navlinkStyle}
-                activeStyle={activeStyle}>
-                Signup
-              </NavLink>
-            ]}
+        {isSignedIn && user ? (
+          [
+            <UserAvatar key="user" user={user} />,
+            <NavLink
+              key="signout"
+              to="/"
+              style={navlinkStyle}
+              onClick={handleSignOutClick}>
+              Sign out
+            </NavLink>
+          ]
+        ) : (
+          <NavLink
+            key="login"
+            to="/login"
+            style={navlinkStyle}
+            activeStyle={activeStyle}>
+            Login / Signup
+          </NavLink>
+        )}
       </div>
     </div>
   );
