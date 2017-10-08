@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+
 import Navbar from './Navbar.js';
 import HomeContainer from './HomePage/HomeContainer';
 import LoginContainer from './LoginPage/LoginContainer';
-import RegisterContainer from './RegisterPage/RegisterContainer';
 import DashboardContainer from './DashboardPage/DashboardContainer';
+
 import initClient, { getSignInStatus } from '../utils/auth.js';
+import { getMovieGenres } from '../../utils/api.js';
 
 const style = {
   display: 'flex',
@@ -17,11 +20,23 @@ const style = {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: null, isSignedIn: false };
+    this.state = { user: null, isSignedIn: false, genres: [] };
 
     this.setSignInStatus = this.setSignInStatus.bind(this);
     this.setUser = this.setUser.bind(this);
     this.configureAuth = this.configureAuth.bind(this);
+    this.getGenres = this.getGenres.bind(this);
+  }
+
+  componentDidMount() {
+    this.getGenres();
+  }
+
+  getGenres() {
+    getMovieGenres(axios.get)
+      .then(response => {
+        console.log(response);
+      })
   }
 
   setSignInStatus(isSignedIn) {
@@ -64,7 +79,6 @@ class App extends Component {
           />
           <Route exact path="/" component={HomeContainer} />
           <Route path="/login" component={LoginContainer} />
-          <Route path="/register" component={RegisterContainer} />
           <Route path="/dashboard" component={DashboardContainer} />
         </div>
       </Router>
