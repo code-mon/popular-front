@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import Navbar from './Navbar.js';
 import HomeContainer from './HomePage/HomeContainer';
 import LoginContainer from './LoginPage/LoginContainer';
@@ -78,7 +82,20 @@ class App extends Component {
             render={() => <Navbar isSignedIn={isSignedIn} user={user} />}
           />
           <Route exact path="/" component={HomeContainer} />
+<<<<<<< HEAD:src/app/App.js
           <Route path="/login" component={LoginContainer} />
+=======
+          <Route
+            path="/login"
+            render={() => {
+              return this.state.isSignedIn ? (
+                <Redirect to="/" />
+              ) : (
+                <LoginContainer />
+              );
+            }}
+          />
+>>>>>>> master:src/components/App.js
           <Route path="/dashboard" component={DashboardContainer} />
         </div>
       </Router>
