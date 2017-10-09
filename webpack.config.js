@@ -28,7 +28,10 @@ const config = {
     new HTMLWebpackPlugin({
       template: './src/index.html'
     })
-  ]
+  ],
+  resolve: {
+    root: path.resolve('./src/app')
+  }
 };
 
 if (process.env.NODE_ENV === 'production') {

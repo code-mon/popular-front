@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { handleSignOutClick } from '../utils/auth.js';
+import { handleSignOutClick } from '../../utils/auth.js';
 import UserAvatar from './UserAvatar.js';
 import PropTypes from 'prop-types';
 
@@ -31,8 +31,30 @@ const activeStyle = {
   color: '#FD4034'
 };
 
-const Navbar = props => {
-  const { isSignedIn, user } = props;
+const ActionLinks = ({ isSignedIn, user }) => {
+  return isSignedIn && user ? (
+    [
+      <UserAvatar key="user" user={user} />,
+      <NavLink
+        key="signout"
+        to="/"
+        style={navlinkStyle}
+        onClick={handleSignOutClick}>
+        Sign out
+      </NavLink>
+    ]
+  ) : (
+    <NavLink
+      key="login"
+      to="/login"
+      style={navlinkStyle}
+      activeStyle={activeStyle}>
+      Login / Signup
+    </NavLink>
+  )
+}
+
+const Navbar = ({ isSignedIn, user }) => {
   return (
     <div style={outerStyle}>
       <div style={linkHolderStyle}>
@@ -41,26 +63,7 @@ const Navbar = props => {
         </NavLink>
       </div>
       <div style={linkHolderStyle}>
-        {isSignedIn && user ? (
-          [
-            <UserAvatar key="user" user={user} />,
-            <NavLink
-              key="signout"
-              to="/"
-              style={navlinkStyle}
-              onClick={handleSignOutClick}>
-              Sign out
-            </NavLink>
-          ]
-        ) : (
-          <NavLink
-            key="login"
-            to="/login"
-            style={navlinkStyle}
-            activeStyle={activeStyle}>
-            Login / Signup
-          </NavLink>
-        )}
+        <ActionLinks />
       </div>
     </div>
   );

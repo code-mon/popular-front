@@ -1,29 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import axios from 'axios';
-import { getMovieGenres } from '../../utils/api.js';
+
+import * as actions from '../actions'
+
 
 class DashboardContainer extends Component {
-    constructor(props) {
-        super(props)
-
-        this.loadMovieGenres = this.loadMovieGenres.bind(this)
-    }
-
-    loadMovieGenres() {
-        getMovieGenres(axios.get)
-            .then(response => response.data)
-            .then(results => console.log(results))
-            .catch(err => console.log(err))
-    }
 
     render() {
         return (
             <div>
-                <button onClick={this.loadMovieGenres}> Get Genres </button>
             </div>
         );
     }
 }
 
-export default DashboardContainer;
+const mapStateToProps = (state) => ({
+  user: state.user
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  bindActionCreators(actions, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+
+// export default connect(
+//   (state) => ({ user: state.user }),
+//   (dispatch) => bindActionCreators(actions, dispatch)
+// )(DashboardContainer)
