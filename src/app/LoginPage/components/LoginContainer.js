@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { handleSignInClick } from '../../../utils/auth.js';
+import { handleSignInClick } from '../../utils/auth';
 
 const styles = {
   base: {

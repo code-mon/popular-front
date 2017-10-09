@@ -4,6 +4,7 @@ const webpack = require('webpack');
 
 const config = {
   entry: './src/index.js',
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
@@ -30,7 +31,7 @@ const config = {
     })
   ],
   resolve: {
-    root: path.resolve('./src/app')
+    modules: [path.resolve(__dirname, 'src/app'), 'node_modules']
   }
 };
 

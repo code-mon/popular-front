@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { handleSignOutClick } from '../../utils/auth.js';
+import { handleSignOutClick } from '../../../utils/auth';
 import UserAvatar from './UserAvatar.js';
 import PropTypes from 'prop-types';
 
@@ -51,8 +51,8 @@ const ActionLinks = ({ isSignedIn, user }) => {
       activeStyle={activeStyle}>
       Login / Signup
     </NavLink>
-  )
-}
+  );
+};
 
 const Navbar = ({ isSignedIn, user }) => {
   return (

@@ -6,14 +6,14 @@ import {
   Redirect
 } from 'react-router-dom';
 import axios from 'axios';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import Navbar from 'Shared/Navbar';
-import HomeContainer from 'HomePage/HomeContainer';
-import LoginContainer from 'LoginPage/LoginContainer';
-import DashboardContainer from 'DashboardPage/DashboardContainer';
+import Navbar from 'Shared';
+import HomeContainer from 'HomePage';
+import LoginContainer from 'LoginPage';
+import DashboardContainer from 'DashboardPage';
 
-import { configureStore } from 'store'
+import { configureStore } from 'store';
 import initClient, { getSignInStatus } from 'utils/auth.js';
 
 const style = {
@@ -31,7 +31,8 @@ class App extends Component {
     this.setSignInStatus = this.setSignInStatus.bind(this);
     this.setUser = this.setUser.bind(this);
     this.configureAuth = this.configureAuth.bind(this);
-    this.getGenres = this.getGenres.bind(this);
+    // commenting out until function is implemented
+    // this.getGenres = this.getGenres.bind(this);
   }
 
   setSignInStatus(isSignedIn) {
