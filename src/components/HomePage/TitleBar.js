@@ -6,7 +6,8 @@ const style = {
   base: {
     fontSize: '64px',
     fontWeight: 'bold',
-    width: '1200px',
+    width: '100%',
+    maxWidth: '1200px',
     margin: '0 auto',
     transform: 'translateY(7px)'
   }

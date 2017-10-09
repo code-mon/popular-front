@@ -4,7 +4,6 @@ import TitleBar from './TitleBar.js';
 import { StyleRoot } from 'radium';
 
 const style = {
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   color: '#FD4034'

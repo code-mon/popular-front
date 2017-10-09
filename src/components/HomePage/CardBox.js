@@ -18,7 +18,7 @@ export default class CardBox extends Component {
     this.styles = {
       base: {
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         maxWidth: '1200px',
         margin: '0 auto',
