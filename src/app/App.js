@@ -9,12 +9,15 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 
 import { Navbar } from 'Shared';
-import { components } from 'HomePage';
-import { LoginContainer } from 'LoginPage';
-import { DashboardContainer } from 'DashboardPage';
+import HomePage from 'HomePage';
+import LoginPage from 'LoginPage';
+import DashboardPage from 'DashboardPage';
 
 import { configureStore } from 'store';
 import initClient, { getSignInStatus } from 'utils/auth.js';
+
+const { HomeContainer } = HomePage.components
+
 
 const style = {
   display: 'flex',
@@ -22,6 +25,7 @@ const style = {
   backgroundColor: '#000000',
   color: '#FD4034'
 };
+
 
 const store = configureStore();
 
@@ -32,7 +36,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Route exact path="/" component={components.HomeContainer} />
+            <Route exact path="/" component={HomeContainer} />
           </div>
         </Router>
       </Provider>
