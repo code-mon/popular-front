@@ -1,1 +1,1 @@
-export { Navbar } from './Navbar/Navbar'
+import Navbar from './Navbar/Navbar'
