@@ -17,6 +17,7 @@ import { configureStore } from 'store'
 import initClient, { getSignInStatus } from 'utils/auth.js'
 
 // object destructuring to get the component we want
+const { AuthContainer } = Shared.components
 const { DashboardContainer } = DashboardPage.components
 const { HomeContainer } = HomePage.components
 const { LoginContainer } = LoginPage.components
@@ -30,6 +31,7 @@ class App extends Component {
             <Provider store={store}>
                 <Router>
                     <div>
+                        <AuthContainer />
                         <Route path="/" component={Navbar} />
                         <Route exact path="/" component={HomeContainer} />
                         <Route path="/login" component={LoginContainer} />
