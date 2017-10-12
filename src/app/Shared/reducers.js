@@ -5,7 +5,7 @@ import {
     SIGN_OUT
 } from './constants'
 
-const user = (state = { user: null, isSignedIn: false }, action) => {
+const user = (state = { isSignedIn: false }, action) => {
     switch (action.type) {
         case SIGN_IN_START:
             return {
@@ -15,7 +15,7 @@ const user = (state = { user: null, isSignedIn: false }, action) => {
         case SIGN_IN_SUCCESS:
             return {
                 ...state,
-                user: action.user,
+                ...action.user,
                 isSignedIn: true
             }
         case SIGN_IN_ERROR:
@@ -26,8 +26,6 @@ const user = (state = { user: null, isSignedIn: false }, action) => {
             }
         case SIGN_OUT:
             return {
-                ...state,
-                user: null,
                 isSignedIn: false
             }
         default:

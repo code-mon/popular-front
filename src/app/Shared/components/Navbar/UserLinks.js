@@ -16,14 +16,14 @@ const activeStyle = {
 }
 
 const UserLinks = ({ user, signInClick, signOutClick }) => {
-    if (user) {
+    if (user.isSignedIn) {
         return [
             <NavLink
                 key="dashboard"
                 to="/dashboard"
                 style={navlinkStyle}
                 activeStyle={activeStyle}>
-                <UserAvatar key="user" user={user} />,
+                <UserAvatar key="user" user={user} />
             </NavLink>,
             <NavLink
                 key="signout"
