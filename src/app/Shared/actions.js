@@ -1,3 +1,4 @@
+import { getUserInfo } from '../DashboardPage/actions'
 import {
     SIGN_IN_START,
     SIGN_IN_SUCCESS,
@@ -57,10 +58,15 @@ const updateUser = (isSignedIn, dispatch) => {
     if (!isSignedIn) {
         return dispatch(signOut())
     }
-    getCurrentUser(dispatch).then((user, error) => {
-        if (error) dispatch(signInError(error))
-        dispatch(signInSuccess(user))
-    })
+    getCurrentUser(dispatch)
+        .then((user, error) => {
+            if (error) dispatch(signInError(error))
+            dispatch(signInSuccess(user))
+            return user
+        })
+        .then(user => {
+            dispatch(getUserInfo(user.Zi.id_token))
+        })
 }
 
 // function updateSignInStatus(isSignedIn, dispatch) {
