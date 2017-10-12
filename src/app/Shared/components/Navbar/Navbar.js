@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { handleSignOutClick } from '../../../utils/auth'
-import UserAvatar from '../UserAvatar/UserAvatar'
+import UserLinksContainer from './UserLinksContainer'
 import PropTypes from 'prop-types'
 
 const outerStyle = {
@@ -31,30 +31,7 @@ const activeStyle = {
     color: '#FD4034'
 }
 
-const ActionLinks = ({ isSignedIn, user }) => {
-    return isSignedIn && user ? (
-        [
-            <UserAvatar key="user" user={user} />,
-            <NavLink
-                key="signout"
-                to="/"
-                style={navlinkStyle}
-                onClick={handleSignOutClick}>
-                Sign out
-            </NavLink>
-        ]
-    ) : (
-        <NavLink
-            key="login"
-            to="/login"
-            style={navlinkStyle}
-            activeStyle={activeStyle}>
-            Login / Signup
-        </NavLink>
-    )
-}
-
-const Navbar = ({ isSignedIn, user }) => {
+const Navbar = () => {
     return (
         <div style={outerStyle}>
             <div style={linkHolderStyle}>
@@ -67,15 +44,10 @@ const Navbar = ({ isSignedIn, user }) => {
                 </NavLink>
             </div>
             <div style={linkHolderStyle}>
-                <ActionLinks />
+                <UserLinksContainer />
             </div>
         </div>
     )
-}
-
-Navbar.propTypes = {
-    isSignedIn: PropTypes.bool.isRequired,
-    user: PropTypes.object
 }
 
 export default Navbar

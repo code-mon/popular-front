@@ -25,7 +25,7 @@ const signInError = error => {
     }
 }
 
-const signOut = () => {
+export const signOut = () => {
     return {
         type: SIGN_OUT
     }
@@ -54,11 +54,10 @@ export const initClient = () => {
 }
 
 const updateUser = (isSignedIn, dispatch) => {
-    console.log(isSignedIn)
     if (!isSignedIn) {
         return dispatch(signOut())
     }
-    getCurrentUser().then((user, error) => {
+    getCurrentUser(dispatch).then((user, error) => {
         if (error) dispatch(signInError(error))
         dispatch(signInSuccess(user))
     })
@@ -68,7 +67,7 @@ const updateUser = (isSignedIn, dispatch) => {
 //     setSignInCB(isSignedIn)
 // }
 
-function getCurrentUser() {
+function getCurrentUser(dispatch) {
     return new Promise((resolve, reject) => {
         dispatch(signInStart())
         const user = gapi.auth2.getAuthInstance().currentUser.get()
