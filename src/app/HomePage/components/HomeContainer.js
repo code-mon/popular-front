@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import CardBox from './CardBox.js';
 import TitleBar from './TitleBar.js';
 import { StyleRoot } from 'radium';
@@ -18,4 +19,4 @@ const HomeContainer = () => {
   );
 };
 
-export default HomeContainer;
+export default connect()(HomeContainer);

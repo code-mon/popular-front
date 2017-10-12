@@ -4,7 +4,6 @@ import { getPageOfMovies } from '../../utils/api.js';
 import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from './MovieCard.js';
 import PropTypes from 'prop-types';
-import '../../css/loader.css';
 const Spinner = require('react-spinkit');
 
 export default class CardBox extends Component {

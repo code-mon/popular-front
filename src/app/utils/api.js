@@ -31,4 +31,17 @@ function getCompleteMovieBackdropPath(path) {
   return `https://image.tmdb.org/t/p/w300${path}`;
 }
 
-export { getPageOfMovies, getCompleteMovieBackdropPath };
+function getMovieGenres(fn) {
+    if (typeof fn != 'function') {
+        throw new Error('Fetch function not passed in to API call')
+    }
+
+    const config = {
+        params: {
+            ...baseConfig,
+        }
+    }
+    return fn('https://api.themoviedb.org/3/genre/movie/list', config)
+}
+
+export { getPageOfMovies, getCompleteMovieBackdropPath, getMovieGenres };
