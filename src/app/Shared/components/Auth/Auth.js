@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { initClient } from '../../actions'
 
 export default class Auth extends Component {
     componentDidMount() {
@@ -8,7 +7,7 @@ export default class Auth extends Component {
 
         script.onload = () => {
             gapi.load('auth2', () => {
-                this.props.dispatch(initClient())
+                this.props.initClient()
             })
         }
 
