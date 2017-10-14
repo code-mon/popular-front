@@ -17,6 +17,13 @@ const dashboardUser = createReducer(
     }
 )
 
+export const userGenres = ( state = [], action ) => {
+    switch( action.type ){
+        case actions.SET_USER_GENRES_START:
+            return [ ...state, ...genre_like ]
+    }
+}
+
 export default combineReducers({
     dashboardGenres,
     dashboardUser
