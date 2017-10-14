@@ -1,5 +1,5 @@
-const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
 const webpack = require('webpack')
 
 const config = {
@@ -43,6 +43,9 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.optimize.UglifyJsPlugin()
     )
+} else {
+    const DashboardPlugin = require('webpack-dashboard/plugin')
+    config.plugins.push(new DashboardPlugin())
 }
 
 module.exports = config
