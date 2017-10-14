@@ -1,4 +1,3 @@
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
@@ -28,8 +27,7 @@ const config = {
     plugins: [
         new HTMLWebpackPlugin({
             template: './src/index.html'
-        }),
-        new DashboardPlugin()
+        })
     ],
     resolve: {
         modules: [path.resolve(__dirname, 'src/app'), 'node_modules']
@@ -45,6 +43,9 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.optimize.UglifyJsPlugin()
     )
+} else {
+    const DashboardPlugin = require('webpack-dashboard/plugin')
+    config.plugins.push(new DashboardPlugin())
 }
 
 module.exports = config
