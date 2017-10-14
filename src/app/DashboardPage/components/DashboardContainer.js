@@ -5,9 +5,16 @@ import PropTypes from 'prop-types';
 
 import * as actions from '../actions';
 
+import GenreContainer from './GenreContainer';
+
 class DashboardContainer extends Component {
   render() {
-    return <div />;
+    return(
+      <div>
+        <h1>sup</h1>
+        <GenreContainer/>
+      </div>
+    )
   }
 }
 
@@ -17,6 +24,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   bindActionCreators(actions, dispatch);
+};
+
+const style = {
+  color: 'white',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
