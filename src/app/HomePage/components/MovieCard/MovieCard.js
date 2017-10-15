@@ -5,46 +5,39 @@ import Radium from 'radium'
 import PropTypes from 'prop-types'
 const Waypoint = require('react-waypoint')
 
+//STYLES
+import localStyle from './MovieCard.style';
+
+//COMPONENTS
+import FavoriteButton from './FavoriteButton';
+
 class MovieCard extends Component {
     constructor(props) {
         super(props)
-        this.styles = {
-            base: {
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                textAlign: 'center',
-                width: '300px',
-                height: '169px',
-                backgroundImage: `url(${getCompleteMovieBackdropPath(
-                    this.props.movieBackdrop
-                )})`,
-                fontSize: '18px',
-                color: '#f5f5f5',
-                opacity: '0.6',
-                transition: 'transform 300ms ease-in',
-                ':hover': {
-                    zIndex: '1',
-                    opacity: '1',
-                    fontSize: '22px',
-                    transform: 'scale(1.2)'
-                }
-            },
-            hidden: {
-                opacity: '0',
-                transform: 'scale(0.7)',
-                visibility: 'hidden'
-            }
-        }
         this.state = {
-            visible: false
+            visible: false,
+            isFavorite: false,
         }
         this.setVisible = this.setVisible.bind(this)
+        this.setFavorite = this.setFavorite.bind(this)        
     }
 
     static propTypes = {
         movieBackdrop: PropTypes.string.isRequired,
         movieTitle: PropTypes.string.isRequired
+    }
+
+    //get the movie backdrop from the prop for the css background
+    getMovieBackgroud() {
+        return `url(${getCompleteMovieBackdropPath(
+        this.props.movieBackdrop
+        )})`;
+    }
+
+    setFavorite() {
+        this.setState({
+            isFavorite: !this.state.isFavorite 
+        });
     }
 
     setVisible() {
@@ -55,15 +48,21 @@ class MovieCard extends Component {
 
     render() {
         const { movieTitle } = this.props
+        //to give a border around selected movies (not 100% sold on the look of this)
+        let tempStyle = null;
+        this.state.isFavorite ? tempStyle = { ...localStyle.base, border: '2px solid #FD4034', backgroundImage: this.getMovieBackgroud(), } : tempStyle = { ...localStyle.base, backgroundImage: this.getMovieBackgroud() };
+        
         return (
             // Waypoint watches for when an element is in view and calls the onEnter and onLeave as needed
             <Waypoint onEnter={this.setVisible} onLeave={this.setVisible}>
                 <div
                     style={[
-                        this.styles.base,
-                        !this.state.visible && this.styles.hidden
-                    ]}>
+                        tempStyle,
+                        !this.state.visible && localStyle.hidden
+                    ]}
+                    onClick={ this.setFavorite }>
                     <MovieTitle>{movieTitle}</MovieTitle>
+                    <FavoriteButton isToggled={ this.state.isFavorite }/>
                 </div>
             </Waypoint>
         )
