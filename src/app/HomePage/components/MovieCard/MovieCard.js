@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getCompleteMovieBackdropPath } from '../../utils/api.js'
+import { getCompleteMovieBackdropPath } from '../../../utils/api.js'
 import MovieTitle from './MovieTitle.js'
 import Radium from 'radium'
 import PropTypes from 'prop-types'

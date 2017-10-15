@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { getPageOfMovies } from '../../utils/api.js';
 import InfiniteScroll from 'react-infinite-scroller';
-import MovieCard from './MovieCard.js';
+import MovieCard from './MovieCard/MovieCard.js';
 import PropTypes from 'prop-types';
 const Spinner = require('react-spinkit');
 
