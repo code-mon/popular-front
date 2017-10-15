@@ -50,7 +50,10 @@ class MovieCard extends Component {
         const { movieTitle } = this.props
         //to give a border around selected movies (not 100% sold on the look of this)
         let tempStyle = null;
-        this.state.isFavorite ? tempStyle = { ...localStyle.base, border: '2px solid #FD4034', backgroundImage: this.getMovieBackgroud(), } : tempStyle = { ...localStyle.base, backgroundImage: this.getMovieBackgroud() };
+
+        //set style based on favorite state
+        this.state.isFavorite ? tempStyle = { ...localStyle.base, border: '2px solid #FD4034', backgroundImage: this.getMovieBackgroud(), }
+        : tempStyle = { ...localStyle.base, backgroundImage: this.getMovieBackgroud() };
         
         return (
             // Waypoint watches for when an element is in view and calls the onEnter and onLeave as needed
