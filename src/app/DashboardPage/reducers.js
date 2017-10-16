@@ -1,26 +1,60 @@
 import { combineReducers } from 'redux'
-import { createReducer } from 'redux-create-reducer'
 import * as actions from './actions'
 
-const dashboardGenres = createReducer([], {
-    [actions.GET_MOVIE_GENRES_START]: state => state,
-    [actions.GET_MOVIE_GENRES_SUCCESS]: (state, { payload }) => payload,
-    [actions.GET_MOVIE_GENRES_FAILURE]: (state, { payload }) => payload
-})
+const initialDashboardGenreState = {
+    error: '',
+    genres: [],
+    isFetching: false
+}
 
-const dashboardUser = createReducer(
-    {},
-    {
-        [actions.GET_USER_INFO_START]: state => state,
-        [actions.GET_USER_INFO_SUCCESS]: (state, { payload }) => payload,
-        [actions.GET_USER_INFO_FAILURE]: (state, { payload }) => payload
-    }
-)
-
-export const userGenres = ( state = [], action ) => {
+export const dashboardGenres = ( state=initialDashboardGenreState, action ) => {
     switch( action.type ){
-        case actions.SET_USER_GENRES_START:
-            return [ ...state, ...genre_like ]
+        case actions.GET_MOVIE_GENRES_START: {
+            return { 
+                ...state,
+                isFetching: true
+            }
+        }
+        case actions.GET_MOVIE_GENRES_SUCCESS: {
+            return {
+                ...state,
+                isFetching: false,
+                genres: action.payload
+            }
+        }
+        case actions.GET_MOVIE_GENRES_FAILURE: {
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            }
+        }
+        default:
+            return state
+    }
+}
+
+const initialDashboardUserState = {
+    error: '',
+    genres: [],
+    isFetching: false
+}
+
+export const dashboardUser = ( state = {}, action ) => {
+    switch( action.type ) {
+        case actions.GET_USER_INFO_START: {
+            return {
+                ...state
+            }
+        }
+        case actions.GET_USER_INFO_SUCCESS: {
+            return {
+                ...state,
+                ...action.payload
+            }
+        }
+        default:
+            return state
     }
 }
 
