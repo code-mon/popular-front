@@ -1,46 +1,27 @@
 import axios from 'axios'
 import { NAME } from './constants'
-
-export const GET_MOVIE_GENRES_START = `${NAME}/GET_MOVIE_GENRES_START`
-export const GET_MOVIE_GENRES_SUCCESS = `${NAME}/GET_MOVIE_GENRES_SUCCESS`
-export const GET_MOVIE_GENRES_FAILURE = `${NAME}/GET_MOVIE_GENRES_FAILURE`
+import config from 'config'
 
 export const GET_USER_INFO_START = `${NAME}/GET_USER_INFO_START`
 export const GET_USER_INFO_SUCCESS = `${NAME}/GET_USER_INFO_SUCCESS`
 export const GET_USER_INFO_FAILURE = `${NAME}/GET_USER_INFO_FAILURE`
 
+export const GET_MOVIE_GENRES_START = `${NAME}/GET_MOVIE_GENRES_START`
+export const GET_MOVIE_GENRES_SUCCESS = `${NAME}/GET_MOVIE_GENRES_SUCCESS`
+export const GET_MOVIE_GENRES_FAILURE = `${NAME}/GET_MOVIE_GENRES_FAILURE`
+
+export const SET_USER_MOVIES_START = `${NAME}/SET_USER_MOVIES_START`
+export const SET_USER_MOVIES_SUCCESS = `${NAME}/SET_USER_MOVIES_SUCCESS`
+export const SET_USER_MOVIES_FAILURE = `${NAME}/SET_USER_MOVIES_FAILURE`
+
 export const SET_USER_GENRES_START = `${NAME}/SET_USER_GENRES_START`
+export const SET_USER_GENRES_SUCCESS = `${NAME}/SET_USER_GENRES_SUCCESS`
+export const SET_USER_GENRES_FAILURE = `${NAME}/SET_USER_GENRES_FAILURE`
 
-//action creators
-const getMovieGenresStart = () => ({
-    type: GET_MOVIE_GENRES_START,
-})
 
-const getMovieGenresSuccess = genres => ({
-    type: GET_MOVIE_GENRES_SUCCESS,
-    payload: genres
-})
-
-const getMovieGenresFailure = error => ({
-    type: GET_MOVIE_GENRES_FAILURE,
-    payload: error
-})
-
-const setMovieGenresStart = genres => ({
-    type: SET_USER_GENRES_START,
-    payload: genres
-})
-
-const setMovieGenresFail = error => ({
-    type: SET_USER_GENRES_FAIL,
-    payload: error
-})
-
-const setMovieGenresSuccess = message => ({
-    type: SET_USER_GENRES_SUCCESS,
-    payload: message
-})
-
+/*
+** Get User info from DB
+*/
 const getUserInfoStart = () => ({
     type: GET_USER_INFO_START
 })
@@ -55,7 +36,36 @@ const getUserInfoFailure = error => ({
     payload: error
 })
 
-//thunk
+export const getUserInfo = userToken => {
+    let url = config.DB_HOST
+    return dispatch => {
+        dispatch(getUserInfoStart())
+        return axios.post(`${url}/user`, {id_token: userToken})
+            .then(response => {
+                const { movies, genres, registered, _id } = response.data.user
+                dispatch(getUserInfoSuccess(movies, genres, registered, _id))
+            })
+            .catch(error => dispatch(getUserInfoFailure(error)))
+    }
+}
+
+/*
+** Get Movie Genres from TMDB
+*/
+const getMovieGenresStart = () => ({
+    type: GET_MOVIE_GENRES_START,
+})
+
+const getMovieGenresSuccess = genres => ({
+    type: GET_MOVIE_GENRES_SUCCESS,
+    payload: genres
+})
+
+const getMovieGenresFailure = error => ({
+    type: GET_MOVIE_GENRES_FAILURE,
+    payload: error
+})
+
 export const getMovieGenres = () => {
     return dispatch => {
         dispatch(getMovieGenresStart())
@@ -67,48 +77,79 @@ export const getMovieGenres = () => {
     }
 }
 
-export const getUserMovies = (genres) => {
-    return (dispatch, genres) => {
-        dispatch(getUserMoviesStart())
-        return axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=2ae29cc0870029d6246318d7ae859e55&with_genres=${genres.join(',')}`)
+/*
+** Set User Genres
+*/
+const setUserGenresStart = () => ({
+    type: SET_USER_GENRES_START,
+})
+
+const setUserGenresSuccess = genre => ({
+    type: SET_USER_GENRES_SUCCESS,
+    payload: genre
+})
+
+const setUserGenresFailure = error => ({
+    type: SET_USER_GENRES_FAILURE,
+    payload: error
+})
+
+export const setUserGenres = (id, genre) => {
+    const config = {
+        url: `/users/genres/${id}`,
+        method: 'PUT',
+        data: genre
+    }
+    return (dispatch) => {
+        dispatch(setUserGenresStart())
+        return axios.put(`/users/genres/${id}`, config)
             .then((response) => {
-                dispatch(getUserMoviesSuccess(response.data.genres))
+                console.log(response.data)
+                dispatch(setUserGenresSuccess(response.data))
             })
-            .catch(error => dispatch(getUserMoviesFailure(error)))
+            .catch(error => dispatch(setUserGenresFailure(error)))
     }
 }
 
-export const getUserInfo = userToken => {
-    let url
-    if (process.env.NODE_ENV === 'production') {
-        // TODO need the production URL
-        url = ''
-    } else {
-        url = 'http://localhost:3000'
-    }
+/*
+** Set User Movies
+*/
+const setUserMoviesStart = () => ({
+    type: SET_USER_GENRES_START,
+})
+
+const setUserMoviesSuccess = (genre) => ({
+    type: SET_USER_GENRES_SUCCESS,
+    payload: genre
+})
+
+const setUserMoviesFail = error => ({
+    type: SET_USER_GENRES_FAIL,
+    payload: error
+})
+
+export const setUserMovies = (id, movie) => {
     return dispatch => {
-        dispatch(getUserInfoStart())
-        return axios.post(`${url}/user`, {id_token: userToken})
-            .then(response => {
-                const { movie_like, genre_like, registered, _id } = response.data.user
-                dispatch(getUserInfoSuccess(movie_like, genre_like, registered, _id))
+        dispatch( getUserMoviesStart(movies))
+        return axios.put(`/user/${id}`, {
+                movies: movie
             })
-            .catch(error => dispatch(getUserInfoFailure(error)))
+            .then((response) => {
+                console.log(response)
+                dispatch(setMovieGenresSuccess())
+            })
+            .catch((error) => {
+                dispatch( setMovieGenresFail(error))
+            })
     }
 }
 
-// export const setUserGenres = genres => {
-//     return dispatch => {
-//         dispatch( getMovieGenresStart(genres))
-//         axios
-//             .put(`sickUrl/user/?userIdGoesHere`, {
-//                 genre_like: genres
-//             })
-//             .then((response) => {
-//                 dispatch( setMovieGenresSuccess( 'i did it!' ))
-//             })
-//             .catch((error) => {
-//                 dispatch( setMovieGenresFail(error))
-//             })
-//     }
-// }
+
+
+
+
+
+
+
+
+

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 
-import GenreItems from './GenreItem'
+import GenreItems from './GenreItems'
 
 class GenresContainer extends Component {
 

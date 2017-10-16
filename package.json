@@ -6,6 +6,7 @@
     "license": "MIT",
     "dependencies": {
         "axios": "^0.16.2",
+        "cross-env": "^5.0.5",
         "prop-types": "^15.6.0",
         "radium": "^0.19.4",
         "react": "^16.0.0",
@@ -43,6 +44,7 @@
         "test:coverage": "jest --coverage",
         "test:watch": "jest --watch",
         "start": "webpack-dashboard -- webpack-dev-server --open",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --open",
         "build": "NODE_ENV='production' webpack -p",
         "deploy": "yarn build && firebase deploy"
     },
