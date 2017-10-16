@@ -37,6 +37,7 @@ export const dashboardGenres = ( state=initialDashboardGenreState, action ) => {
 const initialDashboardUserState = {
     error: '',
     genres: [],
+    movies: [],
     isFetching: false
 }
 
@@ -51,6 +52,12 @@ export const dashboardUser = ( state = {}, action ) => {
             return {
                 ...state,
                 ...action.payload
+            }
+        }
+        case actions.GET_USER_INFO_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
             }
         }
         default:

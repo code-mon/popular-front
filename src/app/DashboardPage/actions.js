@@ -37,10 +37,16 @@ const getUserInfoFailure = error => ({
 })
 
 export const getUserInfo = userToken => {
-    let url = config.DB_HOST
+    const options = {
+        url: `${config.DB_HOST}/user`,
+        method: 'POST',
+        params: {
+            id_token: userToken
+        }
+    }
     return dispatch => {
         dispatch(getUserInfoStart())
-        return axios.post(`${url}/user`, {id_token: userToken})
+        return axios(options)
             .then(response => {
                 const { movies, genres, registered, _id } = response.data.user
                 dispatch(getUserInfoSuccess(movies, genres, registered, _id))
@@ -67,9 +73,14 @@ const getMovieGenresFailure = error => ({
 })
 
 export const getMovieGenres = () => {
+    const options = {
+        url: 'https://api.themoviedb.org/3/genre/movie/list',
+        params: {api_key: config.API_KEY},
+        method: 'GET'
+    }
     return dispatch => {
         dispatch(getMovieGenresStart())
-        return axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=2ae29cc0870029d6246318d7ae859e55')
+        return axios(options)
             .then((response) => {
                 dispatch(getMovieGenresSuccess(response.data.genres))
             })
@@ -84,9 +95,9 @@ const setUserGenresStart = () => ({
     type: SET_USER_GENRES_START,
 })
 
-const setUserGenresSuccess = genre => ({
+const setUserGenresSuccess = message => ({
     type: SET_USER_GENRES_SUCCESS,
-    payload: genre
+    payload: message
 })
 
 const setUserGenresFailure = error => ({
@@ -95,17 +106,16 @@ const setUserGenresFailure = error => ({
 })
 
 export const setUserGenres = (id, genre) => {
-    const config = {
+    const options = {
         url: `/users/genres/${id}`,
         method: 'PUT',
         data: genre
     }
     return (dispatch) => {
         dispatch(setUserGenresStart())
-        return axios.put(`/users/genres/${id}`, config)
-            .then((response) => {
-                console.log(response.data)
-                dispatch(setUserGenresSuccess(response.data))
+        return axios(options)
+            .then(() => {
+                dispatch(setUserGenresSuccess('Genre Successfully Added'))
             })
             .catch(error => dispatch(setUserGenresFailure(error)))
     }
@@ -115,31 +125,33 @@ export const setUserGenres = (id, genre) => {
 ** Set User Movies
 */
 const setUserMoviesStart = () => ({
-    type: SET_USER_GENRES_START,
+    type: SET_USER_MOVIES_START,
 })
 
-const setUserMoviesSuccess = (genre) => ({
-    type: SET_USER_GENRES_SUCCESS,
-    payload: genre
+const setUserMoviesSuccess = message => ({
+    type: SET_USER_MOVIES_SUCCESS,
+    payload: message
 })
 
 const setUserMoviesFail = error => ({
-    type: SET_USER_GENRES_FAIL,
+    type: SET_USER_MOVIES_FAIL,
     payload: error
 })
 
 export const setUserMovies = (id, movie) => {
+    const config = {
+        url: `/users/movies/${id}`,
+        method: 'PUT',
+        data: movie
+    }
     return dispatch => {
-        dispatch( getUserMoviesStart(movies))
-        return axios.put(`/user/${id}`, {
-                movies: movie
-            })
-            .then((response) => {
-                console.log(response)
-                dispatch(setMovieGenresSuccess())
+        dispatch(getUserMoviesStart())
+        return axios(config)
+            .then(() => {
+                dispatch(setUserMoviesSuccess('Movie Successfully Added'))
             })
             .catch((error) => {
-                dispatch( setMovieGenresFail(error))
+                dispatch(setUserMoviesFail(error))
             })
     }
 }
