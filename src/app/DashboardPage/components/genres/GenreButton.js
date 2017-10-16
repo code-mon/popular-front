@@ -1,8 +1,11 @@
 import React from 'react';
 
+//=========================
+// COMPONENT
+//=========================
 const GenreButton = ( { genreName } ) => {
     return(
-        <div style={ { ...localStyles.genreButton, ...localStyles.selected } }>
+        <div style={ { ...localStyles.genreButton, ...localStyles.unselected } }>
             <div style={ localStyles.buttonText }>
                 { genreName }
             </div>
@@ -10,6 +13,9 @@ const GenreButton = ( { genreName } ) => {
     )
 }
 
+//=========================
+// STYLES
+//=========================
 const localStyles = {
     genreButton: {
         display: 'flex',
@@ -19,7 +25,9 @@ const localStyles = {
         height: 110,
         borderRadius: 6,
         border: '1px solid #382F2E',
-        margin: 10,
+        marginBottom: 10,
+        marginLeft: 2,
+        marginRight: 2,
         cursor: 'pointer',
         transition: 'all 1s',
     },
@@ -38,4 +46,7 @@ const localStyles = {
     }
 }
 
+//=========================
+// EXPORT
+//=========================
 export default GenreButton;

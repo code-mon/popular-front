@@ -18,13 +18,12 @@ const GenreItems = ({ genres,  userGenres, isFetching }) => {
 
 const localStyles = {
     container: {
-        margin: 'auto',
-        // backgroundColor: 'yellow',
-        width: '80%',
         display: 'flex',
         flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        width: '80%',
+        margin: 'auto',
         padding: 20,
-
     }
 };
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import MovieCard from '../../../HomePage/components/MovieCard/MovieCard';
 
+//=========================
+// COMPONENT
+//=========================
 class MoviesContainer extends Component {
     render() {
         return (
@@ -14,6 +17,9 @@ class MoviesContainer extends Component {
     }
 }
 
+//=========================
+// STYLES
+//=========================
 const localStyles = {
     container: {
         display: 'flex',
@@ -25,4 +31,7 @@ const localStyles = {
     }
 };
 
+//=========================
+// EXPORT
+//=========================
 export default MoviesContainer;
