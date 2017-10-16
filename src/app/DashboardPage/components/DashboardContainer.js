@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as actions from '../actions';
+import GenresContainer from './genres/GenresContainer';
+import MoviesContainer from './movies/MoviesContainer';
 
 class DashboardContainer extends Component {
+
   render() {
-    return <div />;
+    return(
+      <div>
+        <GenresContainer />
+        <MoviesContainer />
+      </div>
+    )
   }
 }
-
-const mapStateToProps = state => ({
-  user: state.user
-});
-
-const mapDispatchToProps = dispatch => {
-  bindActionCreators(actions, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default DashboardContainer;
 
 // export default connect(
 //   (state) => ({ user: state.user }),
