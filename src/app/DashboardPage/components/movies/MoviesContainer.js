@@ -7,11 +7,14 @@ import MovieCard from '../../../HomePage/components/MovieCard/MovieCard';
 class MoviesContainer extends Component {
     render() {
         return (
-            <div style={ localStyles.container }>
-                <MovieCard/>
-                <MovieCard/>
-                <MovieCard/>
-                <MovieCard/>
+            <div>
+                <h1 style={ { ...localStyles.container, ...localStyles.header } }>...Movies I like</h1>
+                <div style={ { ...localStyles.container, ...localStyles.movieContainer } }>
+                    <MovieCard/>
+                    <MovieCard/>
+                    <MovieCard/>
+                    <MovieCard/>
+                </div>
             </div>
         );
     }
@@ -24,10 +27,19 @@ const localStyles = {
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-between',
         width: '80%',
         margin: 'auto',
         padding: 20,
+    },
+
+    movieContainer: {
+        justifyContent: 'space-between',
+    },
+
+    header: {
+        fontSize: 48,
+        fontWeight: 'bold',
+        justifyContent: 'flex-end',
     }
 };
 
