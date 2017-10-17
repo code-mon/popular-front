@@ -26,9 +26,9 @@ const getUserInfoStart = () => ({
     type: GET_USER_INFO_START
 })
 
-const getUserInfoSuccess = (movie_like, genre_like, registered, _id) => ({
+const getUserInfoSuccess = (movies, genres, registered, _id) => ({
     type: GET_USER_INFO_SUCCESS,
-    payload: {movies: movie_like, genres: genre_like, registered: registered, id: _id}
+    payload: {movies: movies, genres: genres, registered: registered, id: _id}
 })
 
 const getUserInfoFailure = error => ({
@@ -40,7 +40,7 @@ export const getUserInfo = userToken => {
     const options = {
         url: `${config.DB_HOST}/user`,
         method: 'POST',
-        params: {
+        data: {
             id_token: userToken
         }
     }

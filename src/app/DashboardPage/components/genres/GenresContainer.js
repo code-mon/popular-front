@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
+import config from 'config';
 import * as actions from '../../actions';
 
 import GenreItems from './GenreItems'
@@ -10,6 +12,9 @@ class GenresContainer extends Component {
 
     componentDidMount() {
         this.props.getMovieGenres()
+    }
+
+    handleClick() {
     }
 
     render() {
