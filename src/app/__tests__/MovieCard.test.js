@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MovieCard from '../HomePage/MovieCard.js';
+import MovieCard from '../HomePage/components/MovieCard/MovieCard.js';
 const Waypoint = require('react-waypoint');
 
 it('renders correctly', () => {
