@@ -1,36 +1,37 @@
-import React, { Component } from 'react'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import MovieCard from '../../../HomePage/components/MovieCard/MovieCard';
 
-import * as actions from '../../actions';
-
-import MovieItems from './MovieItems'
-
-class GenresContainer extends Component {
-
-    componentDidMount() {
-        this.props.getMovieGenres()
-    }
-
+//=========================
+// COMPONENT
+//=========================
+class MoviesContainer extends Component {
     render() {
         return (
-            <div>
-                <MovieItems
-                    isFetching={this.props.isFetching}
-                    userMovies={this.props.userMovies}
-                />
+            <div style={ localStyles.container }>
+                <MovieCard/>
+                <MovieCard/>
+                <MovieCard/>
+                <MovieCard/>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    isFetching: state.dashboard.dashboardGenres.isFetching,
-    userGenres: state.dashboard.dashboardUser.userMovies
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(actions, dispatch);
+//=========================
+// STYLES
+//=========================
+const localStyles = {
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        width: '80%',
+        margin: 'auto',
+        padding: 20,
+    }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GenresContainer);
+//=========================
+// EXPORT
+//=========================
+export default MoviesContainer;

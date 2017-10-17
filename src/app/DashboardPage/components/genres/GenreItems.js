@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
+import GenreButton from './GenreButton';
 
-const GenreItems = ({ genres, isFetching }) => {
+const GenreItems = ({ genres,  userGenres, isFetching }) => {
     return (
         isFetching ?
-        'fetching...' :
-        genres.map(genre => <div key={genre.id} genrename={genre.name}>{genre.name}</div>)
+        <div style={ localStyles.container }>fetching...</div> 
+        :
+        <div style={ localStyles.container }> 
+            { 
+                genres.map( genre => {
+                    return <GenreButton key={ genre.id } genreName={ genre.name } userGenres={ userGenres }/>
+                }) 
+            }
+        </div>
     );
+};
+
+const localStyles = {
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        width: '80%',
+        margin: 'auto',
+        padding: 20,
+    }
 };
 
 export default GenreItems;

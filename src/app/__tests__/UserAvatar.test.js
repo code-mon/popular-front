@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import UserAvatar from '../UserAvatar.js';
+import UserAvatar from '../Shared/components/UserAvatar.js';
 
 const user = {
   w3: {
