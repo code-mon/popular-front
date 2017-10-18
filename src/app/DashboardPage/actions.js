@@ -106,6 +106,7 @@ const setUserGenresFailure = error => ({
 })
 
 export const setUserGenres = (id, genre) => {
+    console.log('setting user genre')
     const options = {
         url: `/users/genres/${id}`,
         method: 'PUT',

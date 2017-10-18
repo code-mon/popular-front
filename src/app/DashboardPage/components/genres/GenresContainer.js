@@ -23,8 +23,9 @@ class GenresContainer extends Component {
                 <GenreItems
                     genres={this.props.genres}
                     isFetching={this.props.isFetching}
-                    userGenres={this.props.userGenres}
-                />
+                    userId={this.props.userId}
+                    setGenre={this.props.setUserGenres}>
+                </GenreItems>
             </div>
         );
     }
@@ -33,6 +34,7 @@ class GenresContainer extends Component {
 const mapStateToProps = state => ({
     genres: state.dashboard.dashboardGenres.genres,
     isFetching: state.dashboard.dashboardGenres.isFetching,
+    userId: state.dashboard.dashboardUser.id,
     // userGenres: state.dashboard.dashboardUser.info.genre_like
 });
 

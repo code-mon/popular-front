@@ -25,6 +25,7 @@ class GenreButton extends Component{
     }
 
     toggleFavorited(){
+        this.props.setGenre( 1, { hay: 'hay' } );
         this.setState({
             isFavorited: !this.state.isFavorited,
         });
