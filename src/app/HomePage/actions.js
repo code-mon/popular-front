@@ -24,6 +24,7 @@ const setUserMoviesFail = error => ({
 })
 
 export const setUserMovies = (id, movie, isFavorite) => {
+    if (!id) return
     const axiosConfig = {
         url: `${config.DB_HOST}/user/movies/${id}`,
         method: isFavorite ? 'DELETE' : 'PUT',
