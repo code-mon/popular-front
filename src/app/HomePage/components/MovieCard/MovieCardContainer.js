@@ -19,7 +19,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const isFavorite = (favoriteMovies, movieTitle) => {
-    return favoriteMovies.indexOf(movieTitle) > -1 ? true : false
+    const el = favoriteMovies.find(movie => movie.movieTitle === movieTitle)
+    return el ? true : false
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard)

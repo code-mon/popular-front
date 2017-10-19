@@ -27,7 +27,7 @@ export const setUserMovies = (id, movie, isFavorite) => {
     const axiosConfig = {
         url: `${config.DB_HOST}/user/movies/${id}`,
         method: isFavorite ? 'DELETE' : 'PUT',
-        data: { movie }
+        data: movie
     }
     return dispatch => {
         dispatch(setUserMoviesStart())
