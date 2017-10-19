@@ -6,7 +6,7 @@ import user from './Shared/reducers'
 
 export default combineReducers({
     [dashboard.constants.NAME]: dashboard.reducers,
-    // [home.constansts.NAME]: home.reducers,
+    [home.constants.NAME]: home.reducers,
     // [login.constants.NAME]: login.reducers,
     user
 })

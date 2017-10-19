@@ -31,6 +31,11 @@ const config = {
     plugins: [
         new HTMLWebpackPlugin({
             template: './src/index.html'
+        }),
+        new webpack.DefinePlugin({
+            'process.env':{
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            }
         })
     ],
     resolve: {
@@ -40,16 +45,8 @@ const config = {
 
 if (process.env.NODE_ENV === 'production') {
     config.plugins.push(
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-            }
-        }),
         new webpack.optimize.UglifyJsPlugin()
     )
-} else {
-    const DashboardPlugin = require('webpack-dashboard/plugin')
-    config.plugins.push(new DashboardPlugin())
 }
 
 module.exports = config
