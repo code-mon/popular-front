@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
             state.dashboard.dashboardUser.movies,
             ownProps.movieTitle
         ),
-        userId: state.user.isSignedIn ? state.dashboard.dashboardUser.id : null
+        userId: state.dashboard.dashboardUser.id
     }
 }
 
