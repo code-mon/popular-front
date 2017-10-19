@@ -80,7 +80,7 @@ class MovieCard extends Component {
                             userId,
                             {
                                 movieTitle,
-                                movieBackdrop: movieBackdrop
+                                movieBackdrop
                             },
                             isFavorite
                         )}>
