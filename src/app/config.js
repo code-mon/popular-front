@@ -4,7 +4,7 @@ const config = {
         API_KEY: '2ae29cc0870029d6246318d7ae859e55'
     },
     production: {
-        DB_HOST: 'https://final-project-popular-movie.herokuapp.com/',
+        DB_HOST: 'https://final-project-popular-movie.herokuapp.com',
         API_KEY: '2ae29cc0870029d6246318d7ae859e55'
     }
 }
