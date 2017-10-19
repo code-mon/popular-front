@@ -21,29 +21,19 @@ class MoviesContainer extends Component {
     
 
     handleClick(e) {
-        console.log('clicking')
-        const userId = '59e3ecc59bd56421907bb76e'
-        const name = e.target.getAttribute("data-movie")
-        const id = e.target.getAttribute("data-id")
 
-        const movie = {
-            name,
-            id
-        }
-
-        this.props.setUserMovies(userId, movie);
     }
 
     render() {
         return (
             <div>
-                <MovieItems handleEvent={this.handleClick} />
+
                 <h1 style={ { ...localStyles.container, ...localStyles.header } }>...Movies I like</h1>
                 <div style={ { ...localStyles.container, ...localStyles.movieContainer } }>
-                    <MovieCard/>
-                    <MovieCard/>
-                    <MovieCard/>
-                    <MovieCard/>
+                    <MovieItems 
+                        handleClick={this.handleClick} 
+                        userMovies={this.props.userMovies}
+                    />
                 </div>
             </div>
         );
@@ -63,7 +53,7 @@ const localStyles = {
     },
 
     movieContainer: {
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
 
     header: {
@@ -77,6 +67,8 @@ const localStyles = {
 // EXPORT
 //=========================
 const mapStateToProps = state => ({
+    userId: state.dashboard.dashboardUser.id,
+    userMovies: state.dashboard.dashboardUser.movies,
 });
 
 const mapDispatchToProps = dispatch => {

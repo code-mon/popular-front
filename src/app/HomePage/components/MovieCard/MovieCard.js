@@ -23,8 +23,8 @@ class MovieCard extends Component {
     }
 
     static propTypes = {
-        movieBackdrop: PropTypes.string.isRequired,
-        movieTitle: PropTypes.string.isRequired
+        movieBackdrop: PropTypes.string,
+        movieTitle: PropTypes.string
     }
 
     //get the movie backdrop from the prop for the css background

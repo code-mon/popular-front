@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GenreButton from './GenreButton';
+import * as _ from 'lodash'
 
 const GenreItems = ({ genres, userGenres, isFetching, handleClick }) => {
     return (
@@ -11,15 +12,8 @@ const GenreItems = ({ genres, userGenres, isFetching, handleClick }) => {
             <div style={ localStyles.container }>
                 { 
                     genres.map( genre => {
-                        //check if this genre correlates to a user genre
-                        let isFavorited = false;
-                        if( userGenres ) {
-                            for( let i = 0; i < userGenres.length; ++i ){
-                                if( genre.name === userGenres[i].name ){
-                                    isFavorited = true;
-                                }
-                            }
-                        }
+                        let isFavorited = false
+                        if (_.find(userGenres, (userGenre) => { return userGenre.name == genre.name})) { isFavorited = true }
                         return <GenreButton 
                                     key={ genre.id } 
                                     genreName={ genre.name }
