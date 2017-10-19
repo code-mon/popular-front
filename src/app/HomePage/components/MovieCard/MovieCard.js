@@ -80,9 +80,7 @@ class MovieCard extends Component {
                             userId,
                             {
                                 movieTitle,
-                                backdropPath: getCompleteMovieBackdropPath(
-                                    movieBackdrop
-                                )
+                                movieBackdrop: movieBackdrop
                             },
                             isFavorite
                         )}>
