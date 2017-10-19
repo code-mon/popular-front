@@ -10,13 +10,17 @@ const style = {
   color: '#FD4034'
 };
 
-const HomeContainer = () => {
+const HomeContainer = (props) => {
   return (
     <div style={style}>
       <TitleBar>POPULAR</TitleBar>
-      <CardBox />
+      <CardBox userGenres={props.userGenres} />
     </div>
   );
 };
 
-export default connect()(HomeContainer);
+const mapStateToProps = state => ({
+    userGenres: state.dashboard.dashboardUser.genres,
+});
+
+export default connect(mapStateToProps)(HomeContainer);

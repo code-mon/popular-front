@@ -30,6 +30,7 @@ export const setUserMovies = (id, movie, isFavorite) => {
         data: movie
     }
     return dispatch => {
+        if (!id) return dispatch(setUserMoviesFail('not signed in'))
         dispatch(setUserMoviesStart())
         return axios(axiosConfig)
             .then((response, error) => {
