@@ -7,10 +7,10 @@ const initialDashboardGenreState = {
     isFetching: false
 }
 
-export const dashboardGenres = ( state=initialDashboardGenreState, action ) => {
-    switch( action.type ){
+export const dashboardGenres = (state = initialDashboardGenreState, action) => {
+    switch (action.type) {
         case actions.GET_MOVIE_GENRES_START: {
-            return { 
+            return {
                 ...state,
                 isFetching: true
             }
@@ -41,8 +41,8 @@ const initialDashboardUserState = {
     isFetching: false
 }
 
-export const dashboardUser = ( state = {}, action ) => {
-    switch( action.type ) {
+export const dashboardUser = (state = initialDashboardUserState, action) => {
+    switch (action.type) {
         case actions.GET_USER_INFO_START: {
             return {
                 ...state
@@ -83,6 +83,14 @@ export const dashboardUser = ( state = {}, action ) => {
             return state;
         }
 
+        case 'home/SET_USER_MOVIES_SUCCESS': {
+            // need to update the movies when a user favorites or deletes a movie
+            return {
+                ...state,
+                movies: action.payload
+            }
+        }
+        
         default:
             return state
     }

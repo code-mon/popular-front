@@ -6,20 +6,20 @@ import PropTypes from 'prop-types'
 const Waypoint = require('react-waypoint')
 
 //STYLES
-import localStyle from './MovieCard.style';
+import localStyle from './MovieCard.style'
 
 //COMPONENTS
-import FavoriteButton from './FavoriteButton';
+import FavoriteButton from './FavoriteButton'
 
 class MovieCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
             visible: false,
-            isFavorite: false,
+            isFavorite: false
         }
         this.setVisible = this.setVisible.bind(this)
-        this.setFavorite = this.setFavorite.bind(this)        
+        this.setFavorite = this.setFavorite.bind(this)
     }
 
     static propTypes = {
@@ -29,15 +29,13 @@ class MovieCard extends Component {
 
     //get the movie backdrop from the prop for the css background
     getMovieBackgroud() {
-        return `url(${getCompleteMovieBackdropPath(
-        this.props.movieBackdrop
-        )})`;
+        return `url(${getCompleteMovieBackdropPath(this.props.movieBackdrop)})`
     }
 
     setFavorite() {
         this.setState({
-            isFavorite: !this.state.isFavorite 
-        });
+            isFavorite: !this.state.isFavorite
+        })
     }
 
     setVisible() {
@@ -47,14 +45,28 @@ class MovieCard extends Component {
     }
 
     render() {
-        const { movieTitle } = this.props
+        const {
+            movieTitle,
+            favoriteMovie,
+            isFavorite,
+            userId,
+            movieBackdrop
+        } = this.props
         //to give a border around selected movies (not 100% sold on the look of this)
-        let tempStyle = null;
+        let tempStyle = null
 
         //set style based on favorite state
-        this.state.isFavorite ? tempStyle = { ...localStyle.base, border: '2px solid #FD4034', backgroundImage: this.getMovieBackgroud(), }
-        : tempStyle = { ...localStyle.base, backgroundImage: this.getMovieBackgroud() };
-        
+        this.state.isFavorite
+            ? (tempStyle = {
+                  ...localStyle.base,
+                  border: '2px solid #FD4034',
+                  backgroundImage: this.getMovieBackgroud()
+              })
+            : (tempStyle = {
+                  ...localStyle.base,
+                  backgroundImage: this.getMovieBackgroud()
+              })
+
         return (
             // Waypoint watches for when an element is in view and calls the onEnter and onLeave as needed
             <Waypoint onEnter={this.setVisible} onLeave={this.setVisible}>
@@ -63,9 +75,17 @@ class MovieCard extends Component {
                         tempStyle,
                         !this.state.visible && localStyle.hidden
                     ]}
-                    onClick={ this.setFavorite }>
+                    onClick={() =>
+                        favoriteMovie(
+                            userId,
+                            {
+                                movieTitle,
+                                movieBackdrop: movieBackdrop
+                            },
+                            isFavorite
+                        )}>
                     <MovieTitle>{movieTitle}</MovieTitle>
-                    <FavoriteButton isToggled={ this.state.isFavorite }/>
+                    <FavoriteButton isToggled={isFavorite} />
                 </div>
             </Waypoint>
         )
