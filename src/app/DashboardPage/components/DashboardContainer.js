@@ -1,23 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import GenresContainer from './genres/GenresContainer';
-import MoviesContainer from './movies/MoviesContainer';
+import GenresContainer from './genres/GenresContainer'
+import MoviesContainer from './movies/MoviesContainer'
 
 class DashboardContainer extends Component {
-
-  render() {
-    return(
-      <div>
-        <GenresContainer />
-        <MoviesContainer />
-      </div>
-    )
-  }
+    render() {
+        return (
+            <div>
+                <GenresContainer />
+                <MoviesContainer movies={this.props.movies} />
+            </div>
+        )
+    }
 }
-export default DashboardContainer;
+DashboardContainer = connect(state => ({
+    movies: state.dashboard.dashboardUser.movies
+}))(DashboardContainer)
 
-// export default connect(
-//   (state) => ({ user: state.user }),
-//   (dispatch) => bindActionCreators(actions, dispatch)
-// )(DashboardContainer)
+export default DashboardContainer

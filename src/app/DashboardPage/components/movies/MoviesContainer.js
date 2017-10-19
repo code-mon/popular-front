@@ -1,13 +1,5 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import axios from 'axios';
-
-import config from 'config';
-import * as actions from '../../actions';
-
-import MovieCard from '../../../HomePage/components/MovieCard/MovieCard';
-import MovieItems from './MovieItems'
+import React, { Component } from 'react'
+import MovieCard from '../../../HomePage/components/MovieCard/MovieCard'
 
 //=========================
 // COMPONENT
@@ -25,18 +17,30 @@ class MoviesContainer extends Component {
     }
 
     render() {
+        const { movies } = this.props
         return (
             <div>
-
-                <h1 style={ { ...localStyles.container, ...localStyles.header } }>...Movies I like</h1>
-                <div style={ { ...localStyles.container, ...localStyles.movieContainer } }>
-                    <MovieItems 
-                        handleClick={this.handleClick} 
-                        userMovies={this.props.userMovies}
-                    />
+                <h1 style={{ ...localStyles.container, ...localStyles.header }}>
+                    ...Movies I like
+                </h1>
+                <div
+                    style={{
+                        ...localStyles.container,
+                        ...localStyles.movieContainer
+                    }}>
+                    {movies.map(movie => {
+                        return (
+                            <MovieCard
+                                key={movie.movieTitle}
+                                movieTitle={movie.movieTitle}
+                                movieBackdrop={movie.backdropPath}
+                                isFavorite={true}
+                            />
+                        )
+                    })}
                 </div>
             </div>
-        );
+        )
     }
 }
 
@@ -49,7 +53,7 @@ const localStyles = {
         flexWrap: 'wrap',
         width: '80%',
         margin: 'auto',
-        padding: 20,
+        padding: 20
     },
 
     movieContainer: {
@@ -59,20 +63,11 @@ const localStyles = {
     header: {
         fontSize: 48,
         fontWeight: 'bold',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-end'
     }
-};
+}
 
 //=========================
 // EXPORT
 //=========================
-const mapStateToProps = state => ({
-    userId: state.dashboard.dashboardUser.id,
-    userMovies: state.dashboard.dashboardUser.movies,
-});
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(actions, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesContainer);
+export default MoviesContainer

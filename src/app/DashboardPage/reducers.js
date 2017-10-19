@@ -108,6 +108,14 @@ export const dashboardUser = (state = initialDashboardUserState, action) => {
             return state;
         }
 
+        case 'home/SET_USER_MOVIES_SUCCESS': {
+            // need to update the movies when a user favorites or deletes a movie
+            return {
+                ...state,
+                movies: action.payload
+            }
+        }
+        
         default:
             return state
     }
