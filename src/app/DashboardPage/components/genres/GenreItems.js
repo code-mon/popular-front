@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GenreButton from './GenreButton';
 
-const GenreItems = ({ genres,  userGenres, isFetching }) => {
+const GenreItems = ({ genres, userGenres, isFetching, handleClick }) => {
     return (
         isFetching ?
         <div style={ { ...localStyles.container, ...localStyles.header } }>fetching...</div> 
@@ -11,7 +11,23 @@ const GenreItems = ({ genres,  userGenres, isFetching }) => {
             <div style={ localStyles.container }>
                 { 
                     genres.map( genre => {
-                        return <GenreButton key={ genre.id } genreName={ genre.name } userGenres={ userGenres }/>
+                        //check if this genre correlates to a user genre
+                        let isFavorited = false;
+                        if( userGenres ) {
+                            for( let i = 0; i < userGenres.length; ++i ){
+                                if( genre.name === userGenres[i].name ){
+                                    isFavorited = true;
+                                }
+                            }
+                        }
+                        return <GenreButton 
+                                    key={ genre.id } 
+                                    genreName={ genre.name }
+                                    userGenres={ userGenres }
+                                    isFavorited={ isFavorited }
+                                    genre={ genre }
+                                    handleClick={ handleClick }>
+                                </GenreButton>
                     }) 
                 }
             </div>

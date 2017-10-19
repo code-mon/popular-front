@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NAME } from './constants'
-import config from '../config'
+import config from 'config'
 
 export const SET_USER_MOVIES_START = `${NAME}/SET_USER_MOVIES_START`
 export const SET_USER_MOVIES_SUCCESS = `${NAME}/SET_USER_MOVIES_SUCCESS`

@@ -9,12 +9,25 @@ import * as actions from '../../actions';
 import GenreItems from './GenreItems'
 
 class GenresContainer extends Component {
+    constructor( props ){
+        super( props );
+
+        this.handleClick = this.handleClick.bind( this );
+    }
 
     componentDidMount() {
         this.props.getMovieGenres()
     }
 
-    handleClick() {
+    handleClick( tGenre ) {
+        if( tGenre.isFavorited ){
+            tGenre.isFavorited = false;
+            this.props.removeUserGenre( this.props.userId, tGenre );
+        }
+        else {
+            tGenre.isFavorited = true;
+            this.props.setUserGenres( this.props.userId, tGenre );
+        }
     }
 
     render() {
@@ -24,7 +37,10 @@ class GenresContainer extends Component {
                     genres={this.props.genres}
                     isFetching={this.props.isFetching}
                     userGenres={this.props.userGenres}
-                />
+                    userId={this.props.userId}
+                    setGenre={this.props.setUserGenres}
+                    handleClick={this.handleClick}>
+                </GenreItems>
             </div>
         );
     }
@@ -33,11 +49,12 @@ class GenresContainer extends Component {
 const mapStateToProps = state => ({
     genres: state.dashboard.dashboardGenres.genres,
     isFetching: state.dashboard.dashboardGenres.isFetching,
-    // userGenres: state.dashboard.dashboardUser.info.genre_like
+    userId: state.dashboard.dashboardUser.id,
+    userGenres: state.dashboard.dashboardUser.genres,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(actions, dispatch);
+    return bindActionCreators(actions, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresContainer);
