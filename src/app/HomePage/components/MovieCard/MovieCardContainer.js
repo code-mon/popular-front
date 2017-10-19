@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
             state.dashboard.dashboardUser.movies,
             ownProps.movieTitle
         ),
-        userId: isSignedIn(state.isSignedIn, state.dashboard.dashboardUser.id)
+        userId: state.user.isSignedIn ? state.dashboard.dashboardUser.id : null
     }
 }
 
@@ -21,11 +21,6 @@ const mapDispatchToProps = dispatch => {
 const isFavorite = (favoriteMovies, movieTitle) => {
     const el = favoriteMovies.find(movie => movie.movieTitle === movieTitle)
     return el ? true : false
-}
-
-const isSignedIn = (isSignedIn, userId) => {
-    if (!isSignedIn) return null
-    return userId
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCard)
