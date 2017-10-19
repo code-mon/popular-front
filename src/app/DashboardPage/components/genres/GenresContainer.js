@@ -19,13 +19,11 @@ class GenresContainer extends Component {
         this.props.getMovieGenres()
     }
 
-    handleClick( tGenre ) {
-        if( tGenre.isFavorited ){
-            tGenre.isFavorited = false;
+    handleClick( tGenre, isFavorited ) {
+        if( isFavorited ){
             this.props.removeUserGenre( this.props.userId, tGenre );
         }
         else {
-            tGenre.isFavorited = true;
             this.props.setUserGenres( this.props.userId, tGenre );
         }
     }

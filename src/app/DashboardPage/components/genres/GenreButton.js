@@ -4,15 +4,11 @@ import React, { Component } from 'react';
 // COMPONENT
 //=========================
 const GenreButton = ( { genre, genreName, handleClick, isFavorited } ) => {
-    
-    // let isFavorited = userGenres.find( { name: genreName } ) > -1 ? true : false
-    // console.log( isFavorited );
-
-    let tempStyle = null;
+    let tempStyle;
     isFavorited ? tempStyle = { ...localStyles.genreButton, ...localStyles.selected }
     : tempStyle = { ...localStyles.genreButton, ...localStyles.unselected };
     return(
-        <div style={ tempStyle } onClick={ () => { handleClick( genre ) } }>
+        <div style={ tempStyle } onClick={ () => { handleClick( genre, isFavorited ) } }>
             <div style={ localStyles.buttonText }>
                 { genreName }
             </div>
