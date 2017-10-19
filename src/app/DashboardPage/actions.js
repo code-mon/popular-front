@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NAME } from './constants'
-import config from 'config'
+import config from '../config'
 
 export const GET_USER_INFO_START = `${NAME}/GET_USER_INFO_START`
 export const GET_USER_INFO_SUCCESS = `${NAME}/GET_USER_INFO_SUCCESS`
@@ -18,6 +18,8 @@ export const SET_USER_GENRES_START = `${NAME}/SET_USER_GENRES_START`
 export const SET_USER_GENRES_SUCCESS = `${NAME}/SET_USER_GENRES_SUCCESS`
 export const SET_USER_GENRES_FAILURE = `${NAME}/SET_USER_GENRES_FAILURE`
 
+export const SET_USER_GENRES_STATE = `${NAME}/SET_USER_GENRES_STATE`
+export const REMOVE_USER_GENRE_STATE = `${NAME}/REMOVE_USER_GENRE_STATE`
 
 /*
 ** Get User info from DB
@@ -105,9 +107,20 @@ const setUserGenresFailure = error => ({
     payload: error
 })
 
+const setUserGenreState = genre => ({
+    type: SET_USER_GENRES_STATE,
+    payload: genre,
+});
+
+export const removeUserGenreState = ( id, genre ) => ({
+    type: REMOVE_USER_GENRE_STATE,
+    payload: genre,
+});
+
+//todo combine both those below
 export const setUserGenres = (id, genre) => {
     const options = {
-        url: `/users/genres/${id}`,
+        url: `${config.DB_HOST}/user/genres/${id}`,
         method: 'PUT',
         data: genre
     }
@@ -116,10 +129,27 @@ export const setUserGenres = (id, genre) => {
         return axios(options)
             .then(() => {
                 dispatch(setUserGenresSuccess('Genre Successfully Added'))
+                dispatch(setUserGenreState( genre ))
             })
             .catch(error => dispatch(setUserGenresFailure(error)))
     }
 }
+
+export const removeUserGenre = ( id, genre ) => {
+    const options = {
+        url: `${config.DB_HOST}/user/genres/${id}`,
+        method: 'DELETE',
+        data: genre
+    }
+    return (dispatch) => {
+        return axios(options)
+            .then(() => {
+                dispatch(setUserGenresSuccess('Genre Successfully Removed'))
+                dispatch(removeUserGenreState( id, genre ))
+            })
+            .catch(error => dispatch(setUserGenresFailure(error)))
+    }
+};
 
 /*
 ** Set User Movies
@@ -140,7 +170,7 @@ const setUserMoviesFail = error => ({
 
 export const setUserMovies = (id, movie) => {
     const config = {
-        url: `/users/movies/${id}`,
+        url: `${config.DB_HOST}/users/movies/${id}`,
         method: 'PUT',
         data: movie
     }

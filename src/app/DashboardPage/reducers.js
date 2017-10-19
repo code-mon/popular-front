@@ -60,6 +60,29 @@ export const dashboardUser = (state = initialDashboardUserState, action) => {
                 error: action.payload
             }
         }
+
+        case actions.SET_USER_GENRES_STATE: {
+            return {
+                ...state,
+                genres: [ ...state.genres, action.payload ]
+            }
+        }
+
+        case actions.REMOVE_USER_GENRE_STATE: {
+            return {
+                ...state,
+                genres: [ ...state.genres.filter( genre => action.payload !== genre ) ]
+            }
+        }
+
+        case actions.SET_USER_GENRES_SUCCESS: {
+            return state;
+        }
+
+        case actions.SET_USER_GENRES_FAILURE: {
+            return state;
+        }
+
         case 'home/SET_USER_MOVIES_SUCCESS': {
             // need to update the movies when a user favorites or deletes a movie
             return {
@@ -67,6 +90,7 @@ export const dashboardUser = (state = initialDashboardUserState, action) => {
                 movies: action.payload
             }
         }
+        
         default:
             return state
     }
