@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NAME } from './constants'
-import config from 'config'
+import config from '../config'
 
 export const GET_USER_INFO_START = `${NAME}/GET_USER_INFO_START`
 export const GET_USER_INFO_SUCCESS = `${NAME}/GET_USER_INFO_SUCCESS`
@@ -112,28 +112,44 @@ const setUserGenreState = genre => ({
     payload: genre,
 });
 
-export const removeUserGenre = ( id, genre ) => ({
+export const removeUserGenreState = ( id, genre ) => ({
     type: REMOVE_USER_GENRE_STATE,
     payload: genre,
 });
 
+//todo combine both those below
 export const setUserGenres = (id, genre) => {
-    console.log('setting user genre')
     const options = {
-        url: `${config.DB_HOST}/users/genres/${id}`,
+        url: `${config.DB_HOST}/user/genres/${id}`,
         method: 'PUT',
         data: genre
     }
     return (dispatch) => {
         dispatch(setUserGenresStart())
-        dispatch(setUserGenreState( genre ))
         return axios(options)
             .then(() => {
                 dispatch(setUserGenresSuccess('Genre Successfully Added'))
+                dispatch(setUserGenreState( genre ))
             })
             .catch(error => dispatch(setUserGenresFailure(error)))
     }
 }
+
+export const removeUserGenre = ( id, genre ) => {
+    const options = {
+        url: `${config.DB_HOST}/user/genres/${id}`,
+        method: 'DELETE',
+        data: genre
+    }
+    return (dispatch) => {
+        return axios(options)
+            .then(() => {
+                dispatch(setUserGenresSuccess('Genre Successfully Removed'))
+                dispatch(removeUserGenreState( id, genre ))
+            })
+            .catch(error => dispatch(setUserGenresFailure(error)))
+    }
+};
 
 /*
 ** Set User Movies

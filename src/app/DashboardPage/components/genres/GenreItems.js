@@ -12,18 +12,19 @@ const GenreItems = ({ genres, userGenres, isFetching, handleClick }) => {
                 { 
                     genres.map( genre => {
                         //check if this genre correlates to a user genre
-                        let tempFavorited = false;
+                        let isFavorited = false;
                         if( userGenres ) {
                             for( let i = 0; i < userGenres.length; ++i ){
                                 if( genre.name === userGenres[i].name ){
-                                    tempFavorited = true;
+                                    isFavorited = true;
                                 }
                             }
                         }
                         return <GenreButton 
                                     key={ genre.id } 
                                     genreName={ genre.name }
-                                    isFavorited={ tempFavorited }
+                                    userGenres={ userGenres }
+                                    isFavorited={ isFavorited }
                                     genre={ genre }
                                     handleClick={ handleClick }>
                                 </GenreButton>

@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 // COMPONENT
 //=========================
 const GenreButton = ( { genre, genreName, handleClick, isFavorited } ) => {
+    
+    // let isFavorited = userGenres.find( { name: genreName } ) > -1 ? true : false
+    // console.log( isFavorited );
+
     let tempStyle = null;
     isFavorited ? tempStyle = { ...localStyles.genreButton, ...localStyles.selected }
     : tempStyle = { ...localStyles.genreButton, ...localStyles.unselected };
