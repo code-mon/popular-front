@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { NAME } from './constants'
-import config from 'config'
+import config from '../config'
 
 export const SET_USER_MOVIES_START = `${NAME}/SET_USER_MOVIES_START`
 export const SET_USER_MOVIES_SUCCESS = `${NAME}/SET_USER_MOVIES_SUCCESS`
@@ -10,7 +10,7 @@ export const SET_USER_MOVIES_FAILURE = `${NAME}/SET_USER_MOVIES_FAILURE`
 ** Set User Movies
 */
 const setUserMoviesStart = () => ({
-    type: SET_USER_MOVIES_START,
+    type: SET_USER_MOVIES_START
 })
 
 const setUserMoviesSuccess = movies => ({
@@ -19,35 +19,28 @@ const setUserMoviesSuccess = movies => ({
 })
 
 const setUserMoviesFail = error => ({
-    type: SET_USER_MOVIES_FAIL,
+    type: SET_USER_MOVIES_FAILURE,
     payload: error
 })
 
-export const setUserMovies = (id, movie) => {
-    const config = {
-        url: `/users/movies/${id}`,
-        method: 'PUT',
-        data: movie
+export const setUserMovies = (id, movie, isFavorite) => {
+    const axiosConfig = {
+        url: `${config.DB_HOST}/user/movies/${id}`,
+        method: isFavorite ? 'DELETE' : 'PUT',
+        data: { movie }
     }
     return dispatch => {
-        dispatch(getUserMoviesStart())
-        return axios(config)
-            .then((response) => {
-                const { movies } = response.data.user
+        dispatch(setUserMoviesStart())
+        return axios(axiosConfig)
+            .then((response, error) => {
+                console.log(response)
+                if (error) return dispatch(setUserMoviesFail(error))
+                const { movies } = response.data
                 dispatch(setUserMoviesSuccess(movies))
             })
-            .catch((error) => {
+            .catch(error => {
+                console.log(error)
                 dispatch(setUserMoviesFail(error))
             })
     }
 }
-
-
-
-
-
-
-
-
-
-
