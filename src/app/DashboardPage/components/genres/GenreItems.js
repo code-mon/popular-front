@@ -23,7 +23,6 @@ const GenreItems = ({ genres, userGenres, isFetching, handleClick }) => {
                         return <GenreButton 
                                     key={ genre.id } 
                                     genreName={ genre.name }
-                                    userGenres={ userGenres }
                                     isFavorited={ isFavorited }
                                     genre={ genre }
                                     handleClick={ handleClick }>
