@@ -45,7 +45,13 @@ class MovieCard extends Component {
     }
 
     render() {
-        const { movieTitle, favoriteMovie, isFavorite, userId } = this.props
+        const {
+            movieTitle,
+            favoriteMovie,
+            isFavorite,
+            userId,
+            movieBackdrop
+        } = this.props
         //to give a border around selected movies (not 100% sold on the look of this)
         let tempStyle = null
 
@@ -70,7 +76,16 @@ class MovieCard extends Component {
                         !this.state.visible && localStyle.hidden
                     ]}
                     onClick={() =>
-                        favoriteMovie(userId, movieTitle, isFavorite)}>
+                        favoriteMovie(
+                            userId,
+                            {
+                                movieTitle,
+                                backdropPath: getCompleteMovieBackdropPath(
+                                    movieBackdrop
+                                )
+                            },
+                            isFavorite
+                        )}>
                     <MovieTitle>{movieTitle}</MovieTitle>
                     <FavoriteButton isToggled={isFavorite} />
                 </div>
