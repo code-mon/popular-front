@@ -1,10 +1,8 @@
 import React from 'react';
 
-const MovieItems = ({ movies, isFetching }) => {
+const MovieItems = (props) => {
     return (
-        isFetching ?
-        'fetching...' :
-        movies.map(movie => <div key={movie.id} moviename={movie.name}>{movie.name}</div>)
+        <button onClick={props.handleEvent} data-movie="jurrasic park" data-id="1">SIQ BUTTON BRAH</button>
     );
 };
 

@@ -38,7 +38,8 @@ const initialDashboardUserState = {
     error: '',
     genres: [],
     movies: [],
-    isFetching: false
+    isFetching: false,
+    message: ''
 }
 
 export const dashboardUser = ( state = {}, action ) => {
@@ -55,6 +56,23 @@ export const dashboardUser = ( state = {}, action ) => {
             }
         }
         case actions.GET_USER_INFO_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case actions.SET_USER_MOVIES_START: {
+            return {
+                ...state
+            }
+        }
+        case actions.SET_USER_MOVIES_SUCCESS: {
+            return {
+                ...state,
+                message: action.payload
+            }
+        }
+        case actions.SET_USER_MOVIES_FAILURE: {
             return {
                 ...state,
                 error: action.payload

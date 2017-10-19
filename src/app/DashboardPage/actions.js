@@ -134,19 +134,24 @@ const setUserMoviesSuccess = message => ({
 })
 
 const setUserMoviesFail = error => ({
-    type: SET_USER_MOVIES_FAIL,
+    type: SET_USER_MOVIES_FAILURE,
     payload: error
 })
 
 export const setUserMovies = (id, movie) => {
-    const config = {
-        url: `/users/movies/${id}`,
+
+    const options = {
+        url: `${config.DB_HOST}/users/movies/${id}`,
         method: 'PUT',
         data: movie
     }
+
+    const url = `${config.DB_HOST}/users/movies/${id}`
+
     return dispatch => {
-        dispatch(getUserMoviesStart())
-        return axios(config)
+        dispatch(setUserMoviesStart())
+        console.log(options)
+        axios.put(url, {name: movie.name, id: movie.id})
             .then(() => {
                 dispatch(setUserMoviesSuccess('Movie Successfully Added'))
             })

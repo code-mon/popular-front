@@ -10,7 +10,7 @@ class DashboardContainer extends Component {
     return(
       <div>
         <GenresContainer />
-        {/*<MoviesContainer />*/}
+        <MoviesContainer />
       </div>
     )
   }
