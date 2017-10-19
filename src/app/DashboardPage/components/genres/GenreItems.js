@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GenreButton from './GenreButton';
 
-const GenreItems = ({ genres,  setGenre, isFetching }) => {
+const GenreItems = ({ genres, isFetching, handleClick }) => {
     return (
         isFetching ?
         <div style={ { ...localStyles.container, ...localStyles.header } }>fetching...</div> 
@@ -11,7 +11,13 @@ const GenreItems = ({ genres,  setGenre, isFetching }) => {
             <div style={ localStyles.container }>
                 { 
                     genres.map( genre => {
-                        return <GenreButton key={ genre.id } genreName={ genre.name } setGenre={ setGenre }/>
+                        return <GenreButton 
+                                    key={ genre.id } 
+                                    genreName={ genre.name }
+                                    isFavorited={ genre.isFavorited }
+                                    genre={ genre }
+                                    handleClick={ handleClick }>
+                                </GenreButton>
                     }) 
                 }
             </div>

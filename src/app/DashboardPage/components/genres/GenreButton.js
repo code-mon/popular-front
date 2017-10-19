@@ -21,22 +21,24 @@ class GenreButton extends Component{
             isFavorited: false,
         }
 
-        this.toggleFavorited = this.toggleFavorited.bind( this );
+        // this.toggleFavorited = this.toggleFavorited.bind( this );
     }
 
-    toggleFavorited(){
-        this.props.setGenre( 1, { hay: 'hay' } );
-        this.setState({
-            isFavorited: !this.state.isFavorited,
-        });
-    }
+    // toggleFavorited(){
+    //     this.props.setGenre( 1, { hay: 'hay' } );
+    //     this.setState({
+    //         isFavorited: !this.state.isFavorited,
+    //     });
+    // }
+
 
     render(){
+        console.log( `isFavorited ${ this.props.genre.isFavorited }` );
         let tempStyle = null;
-        this.state.isFavorited ? tempStyle = { ...localStyles.genreButton, ...localStyles.selected }
+        this.props.isFavorited ? tempStyle = { ...localStyles.genreButton, ...localStyles.selected }
         : tempStyle = { ...localStyles.genreButton, ...localStyles.unselected };
         return(
-            <div style={ tempStyle } onClick={ this.toggleFavorited }>
+            <div style={ tempStyle } onClick={ () => { this.props.handleClick( this.props.genre ) } }>
                 <div style={ localStyles.buttonText }>
                     { this.props.genreName }
                 </div>

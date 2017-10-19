@@ -9,12 +9,27 @@ import * as actions from '../../actions';
 import GenreItems from './GenreItems'
 
 class GenresContainer extends Component {
+    constructor( props ){
+        super( props );
+
+        this.handleClick = this.handleClick.bind( this );
+        
+    }
 
     componentDidMount() {
         this.props.getMovieGenres()
     }
 
-    handleClick() {
+    handleClick( tGenre ) {
+        if( tGenre.isFavorited ){
+            tGenre.isFavorited = false;
+        }
+        else {
+            tGenre.isFavorited = true;
+        }
+
+        this.props.setUserGenres( this.props.userId, tGenre );
+        console.log( tGenre );
     }
 
     render() {
@@ -24,7 +39,8 @@ class GenresContainer extends Component {
                     genres={this.props.genres}
                     isFetching={this.props.isFetching}
                     userId={this.props.userId}
-                    setGenre={this.props.setUserGenres}>
+                    setGenre={this.props.setUserGenres}
+                    handleClick={this.handleClick}>
                 </GenreItems>
             </div>
         );
