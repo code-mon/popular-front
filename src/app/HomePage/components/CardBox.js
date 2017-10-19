@@ -30,7 +30,8 @@ export default class CardBox extends Component {
     }
 
     loadMoreMovies(page) {
-        getPageOfMovies(axios.get, { page })
+        const { userGenres } = this.props
+        getPageOfMovies(axios.get, { page, userGenres })
             .then(response => {
                 return response.data
             })
@@ -50,7 +51,8 @@ export default class CardBox extends Component {
     }
 
     render() {
-        console.log(this.state.moviesArray)
+        const { userGenres } = this.props;
+
         const cards = this.state.moviesArray.map((movie, i) => {
             return (
                 <MovieCardContainer
@@ -65,7 +67,7 @@ export default class CardBox extends Component {
             <InfiniteScroll
                 style={this.styles.base}
                 hasMore={true}
-                loadMore={this.loadMoreMovies}
+                loadMore={(page) => {this.loadMoreMovies(page, userGenres)}}
                 loader={<Spinner name="circle" color="white" />}
                 useWindow={true}>
                 {cards}

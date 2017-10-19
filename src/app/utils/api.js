@@ -6,12 +6,22 @@ const baseConfig = {
   language: 'en-US'
 };
 
-function getPageOfMovies(fn, { page = 1, sort_by = 'popularity.desc' } = {}) {
+function getPageOfMovies(fn, { page = 1, sort_by = 'popularity.desc', userGenres } = {}) {
   // requies function for fetching data be passed in as first parameter
   if (typeof fn != 'function') {
     throw new Error('Fetch function not passed in to API call');
   }
 
+  console.log(userGenres)
+
+  let genres = []
+
+  for (let index = 0; index < userGenres.length; index++) {
+      let element = userGenres[index];
+
+      genres.push(element.genreId)
+  }
+  
   // merge config objects for axios
   const config = {
     params: {
@@ -22,6 +32,11 @@ function getPageOfMovies(fn, { page = 1, sort_by = 'popularity.desc' } = {}) {
       page
     }
   };
+
+  if (userGenres) {
+      config.params.with_genres = genres.join(',');
+  }
+
   return fn('https://api.themoviedb.org/3/discover/movie', config);
 }
 
