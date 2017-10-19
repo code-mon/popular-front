@@ -5,6 +5,17 @@ import MovieCard from '../../../HomePage/components/MovieCard/MovieCard'
 // COMPONENT
 //=========================
 class MoviesContainer extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.handleClick = this.handleClick.bind(this)
+    }
+    
+
+    handleClick(e) {
+
+    }
+
     render() {
         const { movies } = this.props
         return (
@@ -22,7 +33,7 @@ class MoviesContainer extends Component {
                             <MovieCard
                                 key={movie.movieTitle}
                                 movieTitle={movie.movieTitle}
-                                movieBackdrop={movie.movieBackdrop}
+                                movieBackdrop={movie.backdropPath}
                                 isFavorite={true}
                             />
                         )
@@ -46,7 +57,7 @@ const localStyles = {
     },
 
     movieContainer: {
-        justifyContent: 'space-between'
+        justifyContent: 'center',
     },
 
     header: {

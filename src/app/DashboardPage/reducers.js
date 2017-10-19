@@ -38,7 +38,8 @@ const initialDashboardUserState = {
     error: '',
     genres: [],
     movies: [],
-    isFetching: false
+    isFetching: false,
+    message: ''
 }
 
 export const dashboardUser = (state = initialDashboardUserState, action) => {
@@ -58,6 +59,30 @@ export const dashboardUser = (state = initialDashboardUserState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+        }
+        case actions.SET_USER_MOVIES_START: {
+            return {
+                ...state
+            }
+        }
+        case actions.SET_USER_MOVIES_SUCCESS: {
+            return {
+                ...state,
+                message: action.payload
+            }
+        }
+        case actions.SET_USER_MOVIES_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case 'home/SET_USER_MOVIES_SUCCESS': {
+            // need to update the movies when a user favorites or deletes a movie
+            return {
+                ...state,
+                movies: action.payload
             }
         }
 

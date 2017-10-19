@@ -12,8 +12,4 @@ const MovieTitle = ({ children }) => {
     return <div style={style.base}>{children}</div>
 }
 
-MovieTitle.propTypes = {
-    children: PropTypes.node.isRequired
-}
-
 export default MovieTitle

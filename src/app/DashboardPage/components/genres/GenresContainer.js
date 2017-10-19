@@ -13,19 +13,26 @@ class GenresContainer extends Component {
         super( props );
 
         this.handleClick = this.handleClick.bind( this );
+        this.removeGenre = this.removeGenre.bind( this );
+        this.addGenre = this.addGenre.bind( this );
     }
 
     componentDidMount() {
         this.props.getMovieGenres()
     }
 
+    removeGenre( tGenre) {
+        this.props.removeUserGenre( this.props.userId, tGenre );
+    }
+
+    addGenre( tGenre ) {
+        this.props.setUserGenres( this.props.userId, tGenre );
+    }
+
     handleClick( tGenre, isFavorited ) {
-        if( isFavorited ){
-            this.props.removeUserGenre( this.props.userId, tGenre );
-        }
-        else {
-            this.props.setUserGenres( this.props.userId, tGenre );
-        }
+        isFavorited
+        ? this.removeGenre(tGenre)
+        : this.addGenre(tGenre)
     }
 
     render() {

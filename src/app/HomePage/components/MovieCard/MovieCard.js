@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getCompleteMovieBackdropPath } from '../../../utils/api.js'
+import { getCompleteMovieBackdropPath } from 'utils/api.js'
 import MovieTitle from './MovieTitle.js'
 import Radium from 'radium'
 import PropTypes from 'prop-types'
@@ -23,8 +23,8 @@ class MovieCard extends Component {
     }
 
     static propTypes = {
-        movieBackdrop: PropTypes.string.isRequired,
-        movieTitle: PropTypes.string.isRequired
+        movieBackdrop: PropTypes.string,
+        movieTitle: PropTypes.string
     }
 
     //get the movie backdrop from the prop for the css background

@@ -50,6 +50,7 @@ export default class CardBox extends Component {
     }
 
     render() {
+        console.log(this.state.moviesArray)
         const cards = this.state.moviesArray.map((movie, i) => {
             return (
                 <MovieCardContainer
