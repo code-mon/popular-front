@@ -18,6 +18,8 @@ export const SET_USER_GENRES_START = `${NAME}/SET_USER_GENRES_START`
 export const SET_USER_GENRES_SUCCESS = `${NAME}/SET_USER_GENRES_SUCCESS`
 export const SET_USER_GENRES_FAILURE = `${NAME}/SET_USER_GENRES_FAILURE`
 
+export const SET_USER_GENRES_STATE = `${NAME}/SET_USER_GENRES_STATE`
+export const REMOVE_USER_GENRE_STATE = `${NAME}/REMOVE_USER_GENRE_STATE`
 
 /*
 ** Get User info from DB
@@ -105,6 +107,16 @@ const setUserGenresFailure = error => ({
     payload: error
 })
 
+const setUserGenreState = genre => ({
+    type: SET_USER_GENRES_STATE,
+    payload: genre,
+});
+
+export const removeUserGenre = ( id, genre ) => ({
+    type: REMOVE_USER_GENRE_STATE,
+    payload: genre,
+});
+
 export const setUserGenres = (id, genre) => {
     console.log('setting user genre')
     const options = {
@@ -114,6 +126,7 @@ export const setUserGenres = (id, genre) => {
     }
     return (dispatch) => {
         dispatch(setUserGenresStart())
+        dispatch(setUserGenreState( genre ))
         return axios(options)
             .then(() => {
                 dispatch(setUserGenresSuccess('Genre Successfully Added'))
@@ -141,7 +154,7 @@ const setUserMoviesFail = error => ({
 
 export const setUserMovies = (id, movie) => {
     const config = {
-        url: `/users/movies/${id}`,
+        url: `${config.DB_HOST}/users/movies/${id}`,
         method: 'PUT',
         data: movie
     }

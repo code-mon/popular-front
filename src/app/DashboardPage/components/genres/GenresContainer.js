@@ -13,7 +13,6 @@ class GenresContainer extends Component {
         super( props );
 
         this.handleClick = this.handleClick.bind( this );
-        
     }
 
     componentDidMount() {
@@ -23,13 +22,12 @@ class GenresContainer extends Component {
     handleClick( tGenre ) {
         if( tGenre.isFavorited ){
             tGenre.isFavorited = false;
+            this.props.removeUserGenre( this.props.userId, tGenre );
         }
         else {
             tGenre.isFavorited = true;
+            this.props.setUserGenres( this.props.userId, tGenre );
         }
-
-        this.props.setUserGenres( this.props.userId, tGenre );
-        console.log( tGenre );
     }
 
     render() {
@@ -38,6 +36,7 @@ class GenresContainer extends Component {
                 <GenreItems
                     genres={this.props.genres}
                     isFetching={this.props.isFetching}
+                    userGenres={this.props.userGenres}
                     userId={this.props.userId}
                     setGenre={this.props.setUserGenres}
                     handleClick={this.handleClick}>
@@ -51,11 +50,11 @@ const mapStateToProps = state => ({
     genres: state.dashboard.dashboardGenres.genres,
     isFetching: state.dashboard.dashboardGenres.isFetching,
     userId: state.dashboard.dashboardUser.id,
-    // userGenres: state.dashboard.dashboardUser.info.genre_like
+    userGenres: state.dashboard.dashboardUser.genres,
 });
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(actions, dispatch);
+    return bindActionCreators(actions, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresContainer);

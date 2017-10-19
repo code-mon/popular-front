@@ -60,6 +60,29 @@ export const dashboardUser = ( state = {}, action ) => {
                 error: action.payload
             }
         }
+
+        case actions.SET_USER_GENRES_STATE: {
+            return {
+                ...state,
+                genres: [ ...state.genres, action.payload ]
+            }
+        }
+
+        case actions.REMOVE_USER_GENRE_STATE: {
+            return {
+                ...state,
+                genres: [ ...state.genres.filter( genre => action.payload !== genre ) ]
+            }
+        }
+
+        case actions.SET_USER_GENRES_SUCCESS: {
+            return state;
+        }
+
+        case actions.SET_USER_GENRES_FAILURE: {
+            return state;
+        }
+
         default:
             return state
     }
